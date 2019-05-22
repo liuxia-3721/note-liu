@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>指波纹-邪恶联盟</title>
+<style>
+*{margin:0;}
+dl{width:200px;height:200px;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;}
+dl dd{width:200px;height:200px;position:absolute;box-sizing:border-box;border-radius:50%;box-shadow:0 0 5px #000;}
+dl dd:nth-child(1){border:5px solid #f99;}
+dl dd:nth-child(2){border:5px solid #9f9;}
+dl dd:nth-child(3){border:5px solid #99f;}
+dl dd:nth-child(4){border:5px solid #f9f;}
+dl dd:nth-child(5){border:5px solid #ff0;}
+dl dt{border-radius:50%;width:200px;height:200px;position:absolute;background:#0ff;text-align:center;font:40px/200px "";color:#fff;box-shadow:0 0 5px #000;}
+dl:hover dd{animation:bowen 2s linear infinite;}
+dl:hover dd:nth-child(1){animation-delay:.4s;}
+dl:hover dd:nth-child(2){animation-delay:.8s;}
+dl:hover dd:nth-child(3){animation-delay:1.2s;}
+dl:hover dd:nth-child(4){animation-delay:1.6s;}
+@keyframes bowen{
+	0%{transform:scale(1,1);opacity:1;}
+	100%{transform:scale(3,3);opacity:0;}
+}
+</style>
+</head>
+<body>
+<dl>
+	<dd></dd>
+    <dd></dd>
+    <dd></dd>
+    <dd></dd>
+    <dd></dd>
+    <dt>邪恶联盟</dt>
+</dl>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.cont{
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        input{
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background: #00f;
+            z-index:999;
+            border: 0;
+            top: 150px;
+            outline: none;
+            opacity: 0.6;
+        }
+        input.right{
+            right: 0;
+        }
+        input.left{
+            left: 0;
+        }
+        div.box{
+            width: 400px;
+            height: 300px;
+            position: relative;
+        }
+        img{
+            width: 400px;
+            height: 300px;
+            vertical-align: middle;
+            float: left;
+            position: absolute;
+            left:400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <div class="box">
+            <img src="../作业区/数字0-9/0.png" alt="">
+            <img src="../作业区/数字0-9/1.png" alt="">
+            <img src="../作业区/数字0-9/2.png" alt="">
+            <img src="../作业区/数字0-9/3.png" alt="">
+            <img src="../作业区/数字0-9/4.png" alt="">
+        </div>
+
+        <input type="button" value=">>>" class="right">
+        <input type="button" value="<<<" class="left">
+    </div>
+</body>
+<script src="../../js工具箱/eleMove.js"></script>
+<script>
+    var oimg=document.querySelectorAll("img");
+    var oright=document.querySelector(".right");
+    var oleft=document.querySelector(".left");
+    var obox=document.querySelector(".box");
+    var iNow=0;
+    var iPrev=oimg.length-1;
+
+
+    oimg[iNow].style.left=0+"px";
+
+     oright.onclick = function(){
+        if(iNow == oimg.length-1){
+            iNow = 0;
+            iPrev = oimg.length-1;
+        }else{
+            iNow++  //          0  1  2  3  4 
+            iPrev = iNow - 1;    
+        }
+        console.log(iPrev,iNow)
+        
+        // 4.根据索引，显示图片
+        // 让iPrev从0的位置开始走，走到负的一张图片的宽度
+        // oimg[iPrev].style.left = 0;
+        move(oimg[iPrev],{left:-oimg[0].offsetWidth})
+
+        // 让iNow从正的一张图片的位置开始进来，进到0的位置
+        oimg[iNow].style.left = oimg[0].offsetWidth + "px";
+        move(oimg[iNow],{left:0})
+    }
+
+    oleft.onclick = function(){
+
+        if(iNow == 0){
+            iNow = oimg.length-1;
+            iPrev =0;
+        }else{
+            iNow--  //          0  1  2  3  4 
+            iPrev = iNow + 1;    
+        }
+        
+        // 4.根据索引，显示图片
+        // 让iPrev从0的位置开始走，走到负的一张图片的宽度
+        oimg[iPrev].style.left = 0;
+        move(oimg[iPrev],{left:oimg[0].offsetWidth})
+
+        // 让iNow从正的一张图片的位置开始进来，进到0的位置
+        oimg[iNow].style.left = -oimg[0].offsetWidth + "px";
+        move(oimg[iNow],{left:0})
+    }
+ 
+</script>
+</html>

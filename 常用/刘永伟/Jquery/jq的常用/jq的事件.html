@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">22222a 2222</div>
+</body>
+<script src="../jquery.js"></script>
+<script>
+    //jq中只有 dom2级 事件绑定(同一元素可绑定多个相同的事件),但是不存在兼容   
+        // var box = document.querySelector("#box")
+        // console.log(box)
+        // box.click(function(){ console.log(11)})        // 最普通的事件绑定
+
+    // // 元素的对象.on("click","第二参数（选填）"funciton){      on 绑定事件     第二参数为被委托的元素
+    //     box.onclick=function(){
+    //         console.log(11111)
+    //     }
+    // })
+    // box.on("click",function(){
+        //     console.log(111)
+        // })
+        $(box).click(function(){
+            console.log(1111111111111)
+        })
+
+    // 元素的对象.on("click.b",funciton){      句柄
+                    //b 相当于句柄
+    // })
+    // 元素的对象.off("click.b") off 用来解除绑定
+  
+
+    //   bind \ unbind     无法实现事件委托 所以被 on 取代
+    // mouseover()  mousuout()  有冒泡
+    // mouseenter()  mouseleave()  无冒泡
+
+
+    // (元素对象).hover(function(){
+    //     进入触发的函数          对应的是 enter 
+    // },function(){
+    //     离开触发的函数          对应的是 leave
+    // })
+
+    //事件委托
+    //事件源父元素(jq).on("click","子对象(原声)",function(){
+    // })
+    
+    //模拟事件
+    //元素对象.trigger("click") 自动执行点击事件一次 可以放在定时器内达到某种效果  会触发冒泡
+    // 元素对象.triggerHandle("click")          不会触发冒泡
+
+</script>
+</html>

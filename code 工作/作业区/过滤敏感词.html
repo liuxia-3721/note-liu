@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+var str1="去你大爷的,你麻痹,草泥马,你是魔鬼么,妈,习近平，gun,fuck,fuckyou";
+var arr=["爷","麻","痹","草"]
+
+function filt(str){
+    for(var i=0;i<str1.length;i++){
+        for(var j=0;j<arr.length;j++){
+            if(str1[i]==arr[j]){
+             str1=str1.replace(str1[i],"*")
+            }
+        }
+    }
+    console.log(str1)
+}
+filt(str1)
+</script>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 600px;
+            height: 400px;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 1px 1px 2px #00f;
+            overflow: hidden;
+        }
+        .imgBox{
+            width: 600px;
+            height: 400px;
+            position: relative;
+        }
+        img{
+            width: 600px;
+            height: 400px;
+            vertical-align: middle;
+            position: absolute;
+            left: 600px;
+        }
+        img:nth-child(1){
+            left: 0;
+        }
+        input{
+            border: none;
+            width: 60px;
+            height: 30px;
+            position: absolute;
+            top: 170px;
+            background: rgba(100, 100, 200, 0.6);
+            outline: none;
+            cursor: pointer;
+        }
+        .left{
+            left: 0;
+        }
+        .right{
+            right: 0;
+        }
+        .list{
+            width: 600px;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+        }
+        .list span{
+            flex: 1;
+            text-align: center;
+            /* background: #f66; */
+            opacity: 0.8;
+            box-shadow: 1px 1px 1px 1px #00f;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="imgBox">
+            <img src="ke0.jpg" alt="">
+            <img src="ke1.jpg" alt="">
+            <img src="ke2.jpg" alt="">
+            <img src="ke3.jpg" alt="">
+            <img src="ke4.jpg" alt="">
+        </div>
+        
+        <div class="btns">
+            <input type="button" value="<<<" class="left">
+            <input type="button" value=">>>" class="right">
+        </div>
+
+        <div class="list">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
+    </div>
+</body>
+<script src="../../../刘永伟/Jquery/jquery.js"></script>
+<script src="jquery.banner.1.0.0.js"></script>
+<script>
+    $(".box").banner({
+        items:$(".box").children(".imgBox").children("img"), // 图片  必填
+        left:$(".btns").children(".left"),   //按钮
+        right:$(".btns").children(".right"),  // 按钮
+        list:$(".list").children("span"),   // 选项卡
+        autoPlay:false,                      //是否自动播放  true 默认 自动播放
+        delayTime:2000,                      // 显示多久
+        moveTime:200,                        // 更换图片时 的照片
+        autoPlay:true                       //  是否自动轮播
+    })
+
+    //轮播图的功能都有实现，但自动播放的功能依赖于 右按钮 ，所以没有有左右按钮的话， 自动播放的功能就会无法产生效果
+    //不依赖于 按钮的自动播放的功能 请参考 query.banner.1.0.1.js  谢谢。
+</script>
+</html>

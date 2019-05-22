@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div#box{
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            border: 3px solid #0f0;
+            border-radius:50%;
+            position: relative;
+        }
+        div#game{
+            position:absolute;
+            width: 300px;
+            height: 160px;
+            background: url(../game.jpg);
+            background-size: contain;
+            font: 20px/30px "";
+            text-align: center;
+            color: #f00;
+            left: 100px;top: 30px;
+            display: none;
+        }
+        div#game span{
+            color: #00f;
+            display: block;
+        }
+        img{
+            display: block;
+            margin: 0 auto;
+        }
+        img#xiaoji{
+            display: none;
+        }
+        p{
+            margin: 0;
+            height: 30px;
+            font: 20px/30px "";
+            width: 0;
+            background: #99f;
+            text-align: center;
+        }
+        input#btn{
+            font: 30px "";
+            display: block;
+            margin: 15px auto;
+            background: #9f9;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="game">
+            渣渣好，我是大家辉。贪玩蓝月真的很好玩，嘻嘻嘻。
+            <span id="daojishi">10</span>
+            <input type="button" value="点击进入" id="go1"/>
+            <input type="button" value="含泪离开" id="go2"/>
+        </div>
+        <img src="../小鸡.gif" alt=""/>
+        <p id="jindu"></p>
+        <img src="../小鸡2.gif" alt="" id="xiaoji"/>
+    </div>
+    <input type="button" value="正在加载" id="btn"/>
+</body>
+<script>
+var s=0;
+var w=500;
+var speed=20;
+var ojindu=document.getElementById("jindu");
+var ogame=document.getElementById("game");
+var obtn=document.getElementById("btn");
+var oimg=document.getElementById("xiaoji");
+var odaojishi=document.getElementById("daojishi");
+var timer;
+timer=setInterval((jin)
+    ,100
+)
+function jin(){
+    if(w-s < speed){
+        ojindu.innerHTML=100+"%";
+        obtn.value="点击进入"
+        clearInterval(timer);
+        oimg.style.display="block"
+        ogame.style.display="block"
+    }else{
+        s+=speed;
+        ojindu.style.width=s+"px"
+        ojindu.innerHTML=Math.round(s/w*100)+"%";
+    }
+}
+var timer2;
+var m=10;
+
+timer2=setInterval((dao),1000)
+function dao(){
+    if(m>0){
+        m--;
+        odaojishi.innerHTML=m;
+    }else{
+        clearInterval(timer2);
+        ogame.style.display="none"
+    }
+    console.log(m)
+}
+var ogo1=document.getElementById("go1");
+var ogo2=document.getElementById("go2");
+ogo1.onclick=function(){
+    location.href="http://nba.com"
+}
+ogo2.onclick=function(){
+    location.reload(  ) 
+}
+</script>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height: 100px;
+            background: #00f;
+            position: absolute;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+var obox=document.querySelector("div");
+
+var cw = document.documentElement.clientWidth
+var ch = document.documentElement.clientHeight
+console.log(ch)
+
+obox.onmousedown=function(eve){
+    var e=eve||window.event;
+    var l=e.offsetX;
+    var t=e.offsetY;
+    document.onmousemove=function(eve){
+        var e=eve||window.event;
+        var ll=e.clientX-l;
+        var tt=e.clientY-t;
+
+        if(ll<0){
+            ll=0
+        }
+        if(tt<0){
+           tt=0;
+        }
+        if(ll>cw - obox.offsetWidth){
+            ll=cw - obox.offsetWidth;
+            
+        }
+        if(tt>ch - obox.offsetHeight){
+            tt=ch - obox.offsetHeight
+        }
+        obox.style.left=ll+"px";
+        obox.style.top=tt+"px";
+    }
+    // document.onmouseup=function(eve){
+    //     document.onmousemove="null"
+    // }    
+}
+
+
+</script>
+<!-- <script>
+		var goodsid = window.location.search.substring(1).split("&")[1].split("=")[1];
+		var aimg = document.querySelectorAll(".goods_detail_con img");
+		var show_pirze_em = document.querySelector(".show_pirze em");
+		console.log(aimg[0].src)
+		console.log(aimg[1].src)
+		for(var i=0;i<json.length;i++){
+			if(json[i].goodsId == goodsid){
+                console.log(json[i].src)
+                
+				for(var j=0;j<aimg.length;j++){
+					// var src = json[i].src;
+					aimg[j].src = json[i].src;
+					// show_pirze_em = json[i].price;
+					console.log(json[i].src)
+					console.log(aimg[j].src)
+				}
+			}
+		}
+		// aimg[0].src = "images/goods/goods001.jpg";
+		// aimg[1].src = "  ";
+
+		console.log(aimg[0].src)
+		console.log(aimg[1].src)
+		for(var i=0;i<aimg.length;i++){
+			aimg[i].src = json
+		}
+	</script> -->
+</html>

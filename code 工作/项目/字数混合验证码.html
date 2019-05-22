@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="" id="tex1"/>
+    <input type="text" disabled value="" id="tex2"/>
+    <input type="button" value="点击验证" id="btn"/>
+</body>
+<script>
+var otex1=document.getElementById("tex1")
+var otex2=document.getElementById("tex2")
+var obtn=document.getElementById("btn")
+otex2.value=rdm()
+obtn.onclick=function(){
+    if(otex1.value==otex2.value){
+        console.log("嗯！很好！对了！")
+    }else{
+        console.log("瞅好了再填！！！")
+    }
+}
+function rdm(){
+            var a,b,c,d;
+            for(var i=0;i<999;i++){
+                a=String.fromCharCode(Math.round(Math.random()*(48-122)+122));
+                if(57<a.charCodeAt(0)&&65>a.charCodeAt(0)||90<a.charCodeAt(0)&&a.charCodeAt(0)<97){
+                    continue;
+                }
+                b=String.fromCharCode(Math.round(Math.random()*(48-122)+122))
+                if(57<b.charCodeAt(0)&&65>b.charCodeAt(0)||90<b.charCodeAt(0)&&b.charCodeAt(0)<97){
+                    continue;
+                }
+                c=String.fromCharCode(Math.round(Math.random()*(48-122)+122))
+                if(57<c.charCodeAt(0)&&65>c.charCodeAt(0)||90<c.charCodeAt(0)&&c.charCodeAt(0)<97){
+                    continue;
+                }
+                d=String.fromCharCode(Math.round(Math.random()*(48-122)+122))
+                if(57<d.charCodeAt(0)&&65>d.charCodeAt(0)||90<d.charCodeAt(0)&&d.charCodeAt(0)<97){
+                    continue;
+                }
+                return (a+b+c+d);
+            }       
+}
+
+
+</script>            
+</html>

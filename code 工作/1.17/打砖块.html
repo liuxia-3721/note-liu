@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 800px;
+            height: 500px;
+            background: rgba(222, 222, 222, 0.8);
+            margin: 0 auto;
+            position: relative;
+        }
+        div span{   /*托板*/
+            position: absolute;
+            bottom: 20px;
+            width: 80px;
+            height: 10px;
+            background: #000;
+        }
+        div b{      /*小球*/
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            left: 15px;
+            bottom: 30px;
+            border-radius: 50%;
+            background: #00f; 
+        }
+        div.zhuan{
+            /* padding: 1px; */
+            background: #2aa;
+            background-clip: content-box; 
+            width: 98px;
+            height: 38px;
+            padding: 3px;
+            box-sizing: border-box;
+            position: absolute;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>
+        </span>
+        <b></b>
+    </div>
+</body>
+<script>
+    var obox=document.querySelector(".box");
+    var span=document.querySelector("span");
+    var ob=document.querySelector(".box b")
+    var l=0;
+    var speed=20;
+    var timer;
+/////////////////////////////////////////////////////////////////    托板
+    var h=obox.offsetHeight-ob.offsetHeight;
+    var w=obox.offsetWidth-ob.offsetWidth;
+    var speed2=1;
+    var speed3=1;
+    var btm=parseInt(getComputedStyle(ob,false).bottom);
+    var lft=parseInt(getComputedStyle(ob,false).left);
+/////////////////////////////////////////////////////////////////    小球
+//生产砖块
+
+// for(var i=0;i<16;i++){           // 数学方法实现砖块的布局
+//     var odiv=document.createElement("div");
+//     odiv.className="zhuan";
+//     obox.appendChild(odiv);
+
+//     odiv.style.left=(i%8)*99+"px";
+//     odiv.style.top=parseInt(i/8)*38+"px";
+    
+// }
+for(var i=0;i<3;i++){       //循环嵌套实现砖块的布局
+    var t=i*38
+    for(var j=0;j<8;j++){
+        var odiv=document.createElement("div");
+            odiv.className="zhuan";
+            obox.appendChild(odiv);
+
+            odiv.style.left=j*99+"px";
+            odiv.style.top=t+"px";
+
+    }
+}
+var arrDiv=document.querySelectorAll("div.zhuan");
+
+    document.onkeydown=function(eve){
+        clearInterval(timer)
+        var e=eve||window.event;
+        var keycode=e.keycode||e.which;
+        
+        if(keycode==37){
+            if(l<=0){
+                span.style.left=0;
+            }else{
+                l-=speed;
+                span.style.left=l+"px";
+            }
+        }
+        if(keycode==39){
+            if(speed>=obox.offsetWidth-span.offsetWidth-2-l){
+                span.style.left=obox.offsetWidth-span.offsetWidth+"px"
+            }else{
+                l+=speed;
+                span.style.left=l+"px";
+            }
+        }
+///////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////  
+
+//      h                   球可移动的总高度。
+//      w                   球可移动的总宽度。
+
+//      speed2=10;          球上下每次移动的距离。
+//      speed3=10;          球左右每次移动的距离。
+
+//      btm                 球起始位置时距离底部的位置。
+//      lft                 球起使位置时距离左边的位置。
+    timer=setInterval(
+    function(){
+        
+        btm+=speed2;
+        lft+=speed3;
+
+        if(btm==span.offsetHeight+parseInt(getComputedStyle(span,false).bottom)&&(ob.offsetLeft+ob.offsetWidth>=span.offsetLeft)&&(ob.offsetLeft<=span.offsetLeft+span.offsetWidth)){   //球于板在高度一样时 反弹
+            speed2=-speed2;
+         
+        }
+
+
+        for(var i=0;i<arrDiv.length;i++){
+            // console.log(btm+ob.offsetHeight)
+            // console.log(arrDiv[i].offsetHeight+parseInt(getComputedStyle(arrDiv[i],false).top));
+
+
+            if(btm+ob.offsetHeight==parseInt(getComputedStyle(arrDiv[i],false).bottom)&&(ob.offsetLeft+ob.offsetWidth/2>=arrDiv[i].offsetLeft&&ob.offsetLeft+ob.offsetWidth/2<=arrDiv[i].offsetLeft+arrDiv[i].offsetWidth)){  
+                speed2=-speed2;
+                arrDiv[i].remove()
+
+            }   
+        }  
+
+        // if(btm==span.offsetHeight+parseInt(getComputedStyle(span,false).bottom)&&(ob.offsetLeft+ob.offsetWidth>=span.offsetLeft)&&(ob.offsetLeft<=span.offsetLeft+span.offsetWidth)){   //球于板在高度一样时 反弹
+        //     speed2=-speed2;
+        // }
+        // if((ob.offsetLeft+ob.offsetWidth>=span.offsetLeft)&&(ob.offsetLeft<=span.offsetLeft+span.offsetWidth)){  宽度范围
+        //     // speed3=-speed3;
+        //     console.log(1)
+        // }
+        // console.log(span.offsetLeft+span.offsetWidth)
+
+        if(speed2>h-btm){
+            ob.style.bottom=h+"px"
+            speed2=-speed2;
+        }else{
+            ob.style.bottom=btm+"px"
+        }
+        if(btm==0){
+            speed2=-speed2;
+            // alert("游戏结束")
+        }
+        if(speed2>w-lft){
+            ob.style.left=w+"px"
+            speed3=-speed3;
+        }else{
+            ob.style.left=lft+"px"
+        }
+        if(lft<=0){
+            speed3=-speed3;
+        }
+    }
+,1)
+}
+    
+
+</script>
+</html>

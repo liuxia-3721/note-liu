@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 1000px;
+            height: 600px;
+            background: rgb(222, 222, 222);
+            margin: 0 auto;
+            position: relative;
+        }
+        div span{
+            display: block;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #000;
+        }
+        img{
+            width: 50px;
+            height: 80px;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="reoket.png" alt="">
+    </div>
+</body>
+
+<script>
+    var odiv=document.querySelector("div");
+    var reoket=document.querySelector("img");
+    var l=0;
+    var t=0;
+    document.onkeydown=function(eve){
+        var e=eve||window.event;
+        var s=e.keyCode||e.which;
+        switch(s){
+            case s=37:l-=10;break;// 左
+            // case s=38:l-=10;break;//上
+            case s=39:l+=10;break;//右
+            // case s=40:t+=10;break;//下
+        }
+        if(l<0){
+            l=0
+        }
+        if(l>odiv.offsetWidth-reoket.offsetWidth){
+            l=odiv.offsetWidth-reoket.offsetWidth
+        }
+        reoket.style.left=l+"px";
+
+    }
+    var t=odiv.offsetHeight-reoket.offsetHeight-5;
+
+    function zidan(){
+        var a=document.createElement("span");
+        odiv.appendChild(a);
+        a.style.left= reoket.offsetLeft+(reoket.offsetWidth/2)+"px";
+        a.style.top= t+"px"
+        move(a,{"top":0},function(){
+            a.remove()
+        });
+        
+    }
+    setInterval(zidan,1000);
+ 
+
+    setInterval(function(){
+     zidan()
+
+    },3300)    
+
+    function move(ele,json,callBack){
+        clearInterval(ele.timer)
+
+            ele.timer=setInterval(function(){       //开启计时器
+                var onOff=true;
+
+                for(var attr in json){
+                var iNow=attr=="opacity"?getStyle(ele,attr)*100 : parseInt(getStyle(ele,attr));
+                var speed=-8;
+
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                if(json[attr]!=iNow) onOff=false;
+                    
+                if(attr=="opacity"){
+                    ele.style[attr]=(iNow+speed)/100;
+                    ele.style.filter = "alpha(opacity="+ (iNow+speed) +")";
+                }else{
+                    ele.style[attr]=iNow+speed+"px";
+                }
+                
+            }
+            if(onOff){
+                clearInterval(ele.timer);
+                if(callBack) callBack();
+            }
+
+        },50)
+    }
+    
+    function getStyle(ele,attr){
+        if(ele.currentStyle){
+            return ele.currentStyle[attr];
+        }else{
+            return getComputedStyle(ele,false)[attr];
+        }
+    }
+
+// 箭头函数绑定外层 this
+</script>
+</html>

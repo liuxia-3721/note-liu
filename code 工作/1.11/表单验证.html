@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        form div{
+            display: flex;
+            justify-content: space-between;
+            width: 360px;
+            height: 30px;
+            margin: 5px auto;
+        }
+        form div b{
+            display: inline-block;
+            width: 80px;
+        }
+        form div span{
+            display: inline-block;
+            width: 60px;
+            height: 18px;   
+            border: 1px solid #000;
+            font-size: 12px;
+            text-align: center;
+        }
+        form .btn{
+            display: block;
+            margin: 5px auto;
+            width: 80px;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="">
+        <div><b>用户名：</b><input type="text" class="user"/><span></span></div>
+        <div><b>密 码：</b> <input type="text" class="pass"/><span></span></div>
+        <div><b>重复确认：</b> <input type="text" class="pass2"/><span></span></div>
+        <div><b>手机号：</b> <input type="text" class="tel"/><span></span></div>
+        <div><b>邮 箱：</b> <input type="text" class="email"/><span></span></div>
+        <input type="button" value="提交" class="btn"/>
+    </form>
+</body>
+<script>
+    var ouser=document.querySelector(".user");
+    var opass=document.querySelector(".pass");
+    var opass2=document.querySelector(".pass2");
+    var otel=document.querySelector(".tel");
+    var oemail=document.querySelector(".email");
+    var obtn=document.querySelector(".btn");
+    var ovalue=document.querySelectorAll("input")
+   
+    var q=w=e=r=t=false;
+    var arr=[q,w,e,r,t]
+    ouser.onblur=function(){
+        var reg=/^[\u2E80-\u9FFF\w-]{4,20}$/;
+        if(reg.test(this.value)){
+            this.nextElementSibling.innerHTML="合法";
+            q=true;
+        }else{
+            this.nextElementSibling.innerHTML="不合法"
+        }
+    }
+    opass.onblur=function(){
+        var a=b=c=d=0;
+        var numReg=/\d+/;
+        if(numReg.test(this.value)){
+            a=1;
+        }
+        var azReg=/[a-zA-Z]+/;
+        if(azReg.test(this.value)){
+            b=1;
+        }
+        var fuReg=/[^\da-zA-Z]+/;
+        if(fuReg.test(this.value)){
+            c=1;
+        }
+        var hanReg=/[\u2E80-\u9FFF]+/;
+        if(hanReg.test(this.value)){
+            d=-3;
+        }
+        switch(a+b+c+d){
+            case 1:this.nextElementSibling.innerHTML="单一",w=true;break;
+            case 2:this.nextElementSibling.innerHTML="一般",w=true;break;
+            case 3:this.nextElementSibling.innerHTML="挺安全的",w=true;break;
+            default:
+                this.nextElementSibling.innerHTML="不支持汉字",w=false;
+                
+        }
+    }
+    opass2.onclick=function(){
+        if(opass.value==""){
+            this.blur();
+            this.nextElementSibling.innerHTML="无法验证";
+        }
+    }
+    opass2.onfocus=function(){
+        this.nextElementSibling.innerHTML="";
+    }
+    opass2.onblur=function(){
+        if(opass.value===this.value){
+            this.nextElementSibling.innerHTML="通过";
+            r=true;
+        }else{
+            this.nextElementSibling.innerHTML="不一致";            
+        }
+    }
+    otel.onblur=function(){
+        var telReg=/^1[\d]{10}$/;
+        if(telReg.test(otel.value)){
+            this.nextElementSibling.innerHTML="合法";
+            e=true;
+        }else{
+            this.nextElementSibling.innerHTML="号码不合法"
+        }
+    }
+    oemail.onblur=function(){
+        var emlReg=/^[\w-]{3,12}@[\da-zA-Z]{2,9}\.[a-zA-Z]{2,5}$/;
+        if(emlReg.test(this.value)){
+            this.nextElementSibling.innerHTML="可以使用";
+            t=true;
+        }else{
+            this.nextElementSibling.innerHTML="邮箱不合法"
+        }
+    }
+    
+    obtn.onclick=function(){
+
+
+        if(q&&w&&e&&r&&t){
+            alert("提交成功");
+            console.log(q,w,e,r,t);
+            for(var i=0;i<ovalue.length;i++){
+                ovalue[i].value="";
+            }
+            this.value="提交"
+        }else{
+            console.log(q,w,e,r,t);
+            alert("以上输入存在不合法");
+
+        }
+    }
+  
+</script>
+</html>

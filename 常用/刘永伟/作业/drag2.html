@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>利用继承实现拖拽</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #00f;
+            position: absolute;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background: #0f0;
+            position: absolute;
+            left: 200px;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box2"></div>
+</body>
+<script>
+    class Drag{
+        constructor(box){
+        this.box=box;
+
+        this.init();
+        }
+
+        init(){
+            var that=this;
+
+            this.m = this.move.bind(this);
+            this.u = this.up.bind(this);
+
+            this.box.addEventListener("mousedown",function(eve){
+                var e=eve||window.event;
+                that.disX=e.offsetX;
+                that.disY=e.offsetY;
+                
+                document.addEventListener("mousemove",that.m);
+                document.addEventListener("mouseup",that.u)
+            })
+        }
+        move(eve){
+            var e=eve||window.event;
+
+            this.box.style.left=e.clientX-this.disX+ "px" ;
+            this.box.style.top=e.clientY-this.disY+ "px" ;
+        }
+
+        up(){
+            document.removeEventListener("mousemove",this.m);
+            document.removeEventListener("mouseup",this.u)
+        }
+    }
+
+    class Drag2 extends Drag{
+        constructor(box){
+            super(box)
+        }
+        move(eve){
+            var e=eve||window.event;
+
+            var l=e.clientX-this.disX;
+            var t=e.clientY-this.disY
+            if(l<0) l=0;
+            if(t<0) t=0;
+            
+            var w = document.documentElement.clientWidth
+            var h = document.documentElement.clientHeight  
+            console.log(h)
+            if(l>w-this.box.offsetWidth) l=w-this.box.offsetWidth;
+            if(t>h-this.box.offsetHeight) t=h-this.box.offsetHeight;
+
+            this.box.style.left=l + "px" ;
+            this.box.style.top=t + "px" ;
+        }
+    }
+    var box=document.querySelector(".box");
+    new Drag(box);
+
+    var box2=document.querySelector(".box2");
+    new Drag2(box2);
+</script>
+</html>

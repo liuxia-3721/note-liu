@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" width="500" height="90" cellspacing="0">
+        <tr>
+            <td>重新输入</td>
+            <td>重新输入</td>
+            <td>重新输入</td>
+        </tr>
+        <tr>
+            <td>重新输入</td>
+            <td>重新输入</td>
+            <td>重新输入</td>
+        </tr>
+        <tr>
+            <td>重新输入</td>
+            <td>重新输入</td>
+            <td>重新输入</td>
+        </tr>
+    </table>
+</body>
+<script>
+    var atd=document.querySelectorAll("td");
+    for(var i=0;i<atd.length;i++){
+        var  otd=atd[i];
+        otd.onclick=function(){
+            var otex=document.createElement("input");
+            otex.value=otd.innerHTML;
+            this.innerHTML=""
+            this.appendChild(otex); 
+            otex.focus();
+            otex.onclick=function(eve){
+                var e=eve||window.event;
+                e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+            }
+            var that=this;
+            otex.onblur=function(){
+                that.innerHTML=this.value;
+            }
+        }
+
+
+    }
+
+
+</script>
+
+</html>

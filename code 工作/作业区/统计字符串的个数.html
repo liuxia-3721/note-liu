@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script> 
+var str="大家好，我是oo e,哈哈哈。你们小的这是 什么么么么么么么名吗。我是不晓得撒大。";
+var obj={};
+function sta(string){
+    for(var i=0;i<str.length;i++){
+        if(obj[str[i]]){
+            obj[str[i]]++
+        }else{
+            obj[str[i]]=1;
+        }
+    }
+    console.log(obj)
+}
+sta(str)
+</script>
+</html>

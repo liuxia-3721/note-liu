@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul{
+            display: flex;
+            list-style: none;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        li{
+            width: 200px;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        div{
+            /* position: absolute; */
+            width: 100%;
+            height: 100%;
+            background: red;
+            opacity: 0.5;
+        }
+        span{
+            display: inline-block;
+            width: 16px;
+            margin: 0 auto;
+            margin-left: 80px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li style="background:url(img/five.jpg)">
+            <div>
+                <span>我是一层看得到摸不到的面纱</span>
+            </div>
+        
+        </li>
+        <li style="background:url(img/four.jpg)">
+            <div>
+                <span>我是一层看得到摸不到的面纱</span>
+            </div>
+        </li>
+        <li style="background:url(img/one.jpg)">
+            <div>
+                <span>我是一层看得到摸不到的面纱</span>
+            </div>
+        </li>
+        <li style="background:url(img/seven.jpg)">
+            <div>
+                <span>我是一层看得到摸不到的面纱</span>
+            </div>
+        </li>
+        <li style="background:url(img/one.jpg)">
+            <div>
+                <span>我是一层看得到摸不到的面纱</span>
+            </div>
+        </li>
+    </ul>
+</body>
+<script src="../jquery.js"></script>
+<script>
+    $("li").mouseover(function(){
+        $(this).children("div").stop().hide().parent().stop().animate({width:400},1000).siblings().stop().animate({width:150},1000)
+    })
+    $("li").mouseout(function(){
+        $(this).children("div").stop().show().parent().stop().animate({width:200},1000).siblings().stop().animate({width:200},1000)
+    })
+</script>
+</html>

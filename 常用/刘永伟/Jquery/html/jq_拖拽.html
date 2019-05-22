@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #00f;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body> 
+<script src="../jquery.js"></script>
+<script>
+    $(".box").on("mousedown",function(){
+        var l=event.offsetX;
+        var t=event.offsetY;
+
+        $("html").on("mousemove.mm",function(){
+            // console.log(this)
+            var ll=event.clientX-l;
+            var tt=event.clientY-t;
+
+            $(".box").css({
+                left:ll,
+                top:tt
+            })
+        })
+
+        $("html").on("mouseup",function(){
+            console.log(1)
+            $("html").off("mousemove.mm")
+        })
+    })
+
+
+
+</script>
+</html>

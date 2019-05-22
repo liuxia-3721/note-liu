@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+function Bg(){
+    this.cont=document.quertSelector(".cont");
+    this.li=document.querySelector("li");
+
+    this.hard=1;
+    this.choice();
+}
+Bg.prototype.choice=function(){
+    var that=this;
+
+    for(var i=0;i<this.li.length;i++){
+        this.li[i].onclick=function(){
+            that.hart=this.value;
+            this.parentNode.remove();
+
+            that.ready()
+        }
+    }
+}
+
+Bg.prototype.ready=function(){
+
+    this.log=createDiv(this.cont,"logo");
+    this.load=createDiv(this.cont,"load");
+    this.load.style.background="url(imgages/loading1.png) no-repeat center";
+    i=0;
+    s=0;
+    var that=this;
+    setInterval(function(){
+        i++;
+        that.load.style.background="url(images/loading"+(i%3+1)+".png)"
+    },600)
+    setInterval(function(){
+        s+=2;
+        that.cont.style.backgroundPositionY=s+"px"
+    },30);
+    var timer = cleartInterval(function(){
+        that.logo.remove();
+        that.load.remove();
+        that.start();
+
+        clearInterval(timer)
+    })
+}
+Bg.prototype.start=function(){
+    plane.create();
+    plane.frie(this.hard)
+}
+function createDiv(father,myclass){
+    var div=document.createElement("div");
+    div.className=divName;
+
+    father.appendChild(div);
+    return div;
+}
+var plane={
+    cont:document.querySelector(".cont"),
+    // s:0,
+    create:function(){
+        this.ele=createDiv(this.cont,"myplane");
+        this.ele.style.bottom=0 + "px ";
+        this.ele.style.left=(this,cont)
+        this.move()
+    },
+    move:function(){
+        var that=this;
+        document.onmouseover=function(eve){
+            var e=eve||window.event;
+            var l=e.clientX-that.cont.offsetWidth;
+            var t=e.clientY-taht.ele.offsetHeight/2;
+            if(l<0) l=0;
+            if(t<0) t=0;
+            if(l>that.cont.offsetWidth-that.ele.offsetWidth)
+            that.ele.style.left=l + "px" ;
+            that.ele.style.top=t+ "px" ;
+        }
+    },
+    arr=[],
+    fire:function(hard){
+        var that=this;
+        setInterval(function(){
+            that.arr.push(new Bullet);
+        },hard*150)
+    }
+
+}
+function Bullet(){
+    this.cont=document.querySelector(".cont");
+
+    this.create()
+}
+Bullet.prototype={
+    constructor:Bullet,
+    create:function(){
+        this.ele=createDiv(this.cont,"bullet");
+        this.cont.appendChild(this.ele);
+        this.ele.style.top=plane.ele.offsetTop-this.ele.offsetHeight+ "px";
+        this.ele.style.left=plane.ele.offsetLeft+plane.ele.offsetWidth/2-this.ele.offsetWidth/2+"px"\
+
+        this.move()
+    },
+    move:function{
+        this.ele.style.top=this.ele.offsetTop;
+        var that=this;
+        var bulletTimer=setInterval(function(){
+            that.ele.style.top=that.ele-10 +"px";
+            if(that.ele.ofsetTop<=0){
+                clearInterval(bulletTimer)
+                that.die()
+            }
+        },80)
+    },
+    die:function(){
+        var that=this;
+        for(var i= 0;i<plane.arr.length;i++){
+            if(planearr[i].ele==that.ele){
+                plane.arr.splice(i,1)
+            }
+        }
+        
+        setTimeout(function(){
+            that.ele.className="danDie1";
+        },100)
+        setTimeout(function(){
+            taht.ele.className="danDie2";
+        },200)
+        setTimeout(function(){
+            that.ele.remove()
+        },300);
+    }
+}
+</script>
+</html>

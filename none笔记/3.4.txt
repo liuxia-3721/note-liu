@@ -1,0 +1,180 @@
+预习视频概览：
+
+本地存储(localStorage,sessionStorage,)
+多媒体(video,audio api，base64，es6/7类加强)
+绘图（canvas,svg,游戏思想）
+echarts(图形可视化，图表库)
+移动端功能适配，原生移动端js(touchstart,touchcancel,touchmove,touchend,tap)
+zepto、touchJs(移动端库，手势库)
+iscroll、swiper、animate.css(上拉加载，下拉刷新，轮播图库，css动画库，微场景)
+第三方地图库/geolocation(各种地图api调用，原生地理定位实现)
+
+
+三阶段大纲：
+
+1. nodejs
+	给jquery|vue|react|angular|小程序 搭建后端，后台管理+mysql/mongodb  为全站搭建后台
+2. nodejs 项目
+	目的： 完成自己的后端（后台|库|部署远端），为未来的全栈做准备
+3. vue
+4. vue项目
+5. react
+6. react项目
+7. angular|小程序
+8. 混合开发(phoneGap,js_sdk,公众号)
+	目的：调取设备
+9. 模拟面试/项目答辩/面试课/补课(1.2)
+
+就业周的安排:
+	1 模拟面试/项目答辩/面试课(就业老师|完善简历)
+		模拟面试(所有老师): 准备纸质简历-》办公室|会议室
+		项目答辩(项目经理): 教室
+			线上项目 2
+			兴趣DEMO
+	2 同上
+	3 面试
+	4 offter
+	5 人找不到了、
+
+=============================================================
+
+nodeJs:
+	干嘛的： 写后台管理程序
+	目标：数据服务，文件服务，web服务
+	类似：	php  .net   java(jsp) ....
+优势：
+	性能高，方便、入门难度低、大公司都在用（BAT）
+劣势：
+	服务器提供的相对较少
+	能用的上的学习资料少，对程序员的要求高了
+
+环境：nodejs + web服务器 + 数据库
+	php -> wamp	w:window a:aphche m:mysql P:php
+		-> phpnow(后台管理程序) mysql(库) aphche(web服务器)
+	java -> jdk
+	nodejs:
+		安装：双击->一路下一步
+			官网：https://nodejs.org/en/ | http://nodejs.cn/
+			镜像：http://npm.taobao.org/
+			nodejs 环境 	npm 环境
+			测试环境： 命令行(运行->cmd)->node -v
+版本：
+	Vx(主).x(子).x（修正） 包(目录)->模块(文件)
+	主版本： 变化了，1/3的API发生巨变 , 使用方式变化了
+	子：	API没有删减，使用方式没变化,内部实现发生了变化
+	修正版：什么都没变，处理一下bug
+
+	V6.8.2   稳定
+	V6.9.1 非稳定版
+	Vx.x.x-beta 测试
+	vx.x.x-rc  测试稳定
+	vx.x.x-alpha  
+
+
+编写：
+	IDE(有RUN环境,真实服务器)|编辑器|node命令行
+
+运行：命令行
+	1  dos:		win+r->cmd回车->cd 目录-> node 文件名.js | node 文件名
+				IDE|编辑器环境下，运行dos命令行
+				webstrom->terminal(ALT+f12)		|   run
+				vscode->终端
+	2  linux(git):  终端->cd 目录-> node 文件名.js | node 文件名
+					当前目录->右键->git bash-> node 文件名
+	3  node命令行:  多用在调试
+		dos-> node 回车-> 编写+运行
+
+DOM/BOM 不可用
+ECMA 可用
+
+
+web服务
+	web服务器: apache , ngnix , tomcat   localhost|127.0.0.1 | www.my域名.com
+	数据库: mysql | sqlserver | mongoDB | orangcl
+		数据库: 数字|字符
+	web服务器磁盘:（硬盘) 文件本身(图，视频,PDF)   文件服务器
+
+大后端:
+	用户 - > 地址栏(http[s]请求) -> web服务器（收到) - > nodejs处理请求(返回静态、动态)->请求数据库服务(返回结果)->nodejs(接收)->渲染页面->浏览器（接收页面，完成最终渲染)
+大前端:
+	前端 - > http[s]请求 -> web服务器（收到) - > nodejs处理请求(返回静态、动态)->请求数据库服务(返回结果)->nodejs(接收)->返回给前端(渲染)->浏览器（接收页面，完成最终渲染)
+
+项目:
+	用户端(jquery) -> 大前端
+	管理端(bootstarp4) -> 大后端渲染
+
+
+Web服务器搭建
+
+	底层原理: http实例的监听来完成
+
+	实现 过程
+
+		1） 引入http模块	require('http')
+		2)	server/app = http.createServer(函数(req,res));//创建服务   返回http对象
+				req 请求  浏览器->服务器
+					req.url  地址   提取get数据
+					req.on('data|end') 提取post数据 所有的http[s]都会触发end事件
+	  			res 响应  服务器->浏览器
+	  				响应头设置:	res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'});
+	  				res.write(字符/数据<string><buffer>) 返回数据
+	  				res.end() 响应结束
+
+		3) 	监听：
+			server.listen(端口，[地址]，[回调])    回调：监听成功，回调一次
+				端口: 1-65535	1024以下系统占用   80
+				地址: 虚拟localhost  真实域名xx.duapp.com
+
+文件操作:
+	底层原理: C (i/o)
+
+	读取
+		fs.readFile(文件名,[编码],回调(err,data));
+			err 错误 null没有错误
+			data 数据,buffer流
+
+	应用场景： 文件操作
+
+静态资源(html/css/sass/json/js/svg/...)
+
+
+动态请求:
+	前台: get/post/put/delete/ajax/jsonp.....
+	后台：http[s] 请求 ， 处理方式方式
+		GET:	req.url  抓取 get请求的数据  字符 切/url模块
+		POST:	req.on('data',(chunk)=>{CHUNK==每次收到的数据buffer})
+				req.on('end',()=>{	接收完毕 字符 切/querystring })
+
+				接收完毕： 接口请求，静态资源请求，都会触发 end
+
+
+url模块	处理 url
+	url.parse(str,true)  str -> obj  返回 对象  true 处理query->obj
+
+	obj参数		http://localhost:8002/aaa?username=sdfsdf&content=234234#title4
+	  protocol: 'http:',	协议
+	  slashes: true,	双斜杠
+	  auth: null,   作者
+	  host: 'localhost:8002',  主机 www.baidu.com
+	  port: '8002',	端口
+	  hostname: 'localhost',  baidu
+	  hash: '#title',	哈希（锚)
+	  search: '?username=sdfsdf&content=234234',	数据
+	  query: 'username=sdfsdf&content=234234',	数据
+	  pathname: '/aaa',	文件路径
+	  path: '/aaa?username=sdfsdf&content=234234',	文件路径
+	  href: 'http://localhost:8002/aaa?username=sdfsdf&content=234234#title'
+
+	url.format(obj)  obj -> str   返回str
+
+
+工具：
+	模拟前端发送请求
+
+	insomnia 软件
+	postman
+
+
+	自动重启node服务
+	nodemon 包
+	supervisor

@@ -1,0 +1,8 @@
+@charset "utf-8";
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select,img{margin: 0;padding: 0}/* 去除内外边距 */
+a{text-decoration: none;}/* 去除 a 标签的下划线*/
+li{list-style:none;}/* 去除 列表的列表符号*/
+.clear:after{content:"";display: block;clear:both;}  /* 清除浮动 */
+.clear:before{content:"";display: table;}  /*清除 margin-top的的传递问题 */
+html,body{height: 100%;}/* 获取100%的高度 */
+.valign:after{content:"";display: inline-block;height: 100%;vertical-align: middle;}

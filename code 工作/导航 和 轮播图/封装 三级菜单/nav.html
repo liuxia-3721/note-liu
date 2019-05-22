@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        li{
+            list-style-type: none;
+        }
+        .nav{
+            height: 60px;
+            line-height: 60px;
+            background: #ccc;
+        }
+        .nav>ul{
+            display: flex;
+        }
+        .nav>ul>li{
+            flex: 1;
+            text-align: center;
+            height: 60px;
+        }
+     
+        .nav ul ul{
+            background: #eee;
+            display: none;
+        }
+        .nav li li{
+            line-height: 50px;
+            border-bottom: solid 1px #fff
+        }
+    </style>
+</head>
+<script src="../../../刘永伟/Jquery/jquery.js"></script>
+<script>
+$(function(){
+    $(".nav").children("ul").children("li").hover(function(){
+        $(this).children("ul").stop().slideDown().parent().siblings().children("ul").stop().slideUp()
+    },function(){
+        $(this).children("ul").stop().slideUp()
+    })
+
+})
+</script>
+<body>
+    <div class="nav">
+        <ul>
+            <li>
+                <span>二级菜单</span>
+                <ul>
+                    <li>三级菜单</li>
+                    <li>三级菜单</li>
+                </ul>
+            </li>
+            <li>
+                <span>二级菜单</span>
+                <ul>
+                    <li>三级菜单</li>
+                    <li>三级菜单</li>
+                </ul>
+            </li>
+            <li>
+                <span>二级菜单</span>
+                <ul>
+                    <li>三级菜单</li>
+                    <li>三级菜单</li>
+                </ul>
+            </li>
+            <li>
+                <span>二级菜单</span>
+                <ul>
+                    <li>三级菜单</li>
+                    <li>三级菜单</li>
+                </ul>
+            </li>
+           
+
+
+        </ul>
+    </div>
+</body>
+</html>

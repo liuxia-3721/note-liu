@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            height: 30px;
+            width: 100px;
+            background: #00f;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <ul>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+        <li>555</li>
+    </ul>
+</body>
+<script>
+    var oul=document.querySelector("ul");
+    var oli=document.querySelectorAll("li");
+
+
+    oul.onclick=eveEnt(oli,function(){
+        console.log(getComputedStyle(this,false).width)
+       
+        }
+    )
+
+//封装后的事件委托
+    function eveEnt(achaild,callback){
+        return function(eve){
+            var e=eve||window.event;
+            var target=e.target||e.srcElement;
+                for(var i=0;i<achaild.length;i++){
+                    if(achaild[i]==target){
+                    callback.bind(target)()
+                }
+            }
+        }
+    }
+
+
+
+
+    // oul.onclick=function(eve){
+    //     var e=eve||window.event;
+    //     var target=e.target||e.srcElement;
+    //     for(var i=0;i<oli.length;i++){
+    //         if(oli[i]==target){
+    //             console.log(target)
+    //         }
+    //     }
+
+    // }
+
+
+
+</script>
+</html>

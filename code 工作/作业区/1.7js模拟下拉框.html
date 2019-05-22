@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        position: relative;
+    }
+    ul{
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        list-style-type:none;
+        display: none;
+    }
+    ul li:hover{
+        background: #00f
+    }
+
+</style>
+<body>
+    <div>
+        <input type="text" value="选择球队吧" id="tex" readonly/>
+        <ul>
+            <li>洛杉矶湖人</li>
+            <li>金州勇士</li>
+            <li>多伦多猛龙</li>
+            <li>克兰骑士</li>
+            <li>圣奥马刺</li>
+            <li>明苏森林狼</li>
+        </ul>
+        <input type="button" value="确认选择" id="btn"/>
+    </div>
+</body>
+<script>
+    var obtn=document.getElementById("btn")
+    var otex=document.getElementById("tex")
+    var oul=document.querySelector("ul")
+    var oli=document.querySelectorAll("li")
+    otex.onfocus=function(){
+
+        oul.style.display="block";
+        
+        for(var i=0;i<oli.length;i++){
+
+            var ool=oli[i];
+            
+            ool.onclick=function(){
+                otex.value=this.innerHTML
+            }
+        }   
+    }
+    obtn.onclick=function(){
+        oul.style.display="none"
+    }
+    
+
+</script>
+</html>

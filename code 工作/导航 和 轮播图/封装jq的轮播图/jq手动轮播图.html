@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 600px;
+            height: 400px;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 1px 1px 2px #00f;
+            overflow: hidden;
+        }
+        img{
+            width: 600px;
+            height: 400px;
+            vertical-align: middle;
+            position: absolute;
+            left: 600px;
+        }
+        img:nth-child(1){
+            left: 0;
+        }
+        input{
+            border: none;
+            width: 60px;
+            height: 30px;
+            position: absolute;
+            top: 170px;
+            background: rgba(100, 100, 200, 0.6);
+            outline: none;
+            cursor: pointer;
+        }
+        .left{
+            left: 0;
+        }
+        .right{
+            right: 0;
+        }
+        .list{
+            width: 600px;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+        }
+        .list span{
+            flex: 1;
+            text-align: center;
+            /* background: #f66; */
+            opacity: 0.8;
+            box-shadow: 1px 1px 1px 1px #00f;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="ke0.jpg" alt="">
+        <img src="ke1.jpg" alt="">
+        <img src="ke2.jpg" alt="">
+        <img src="ke3.jpg" alt="">
+        <img src="ke4.jpg" alt="">
+        
+        <div class="btns">
+            <input type="button" value="<<<" class="left">
+            <input type="button" value=">>>" class="right">
+        </div>
+
+        <div class="list">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
+    </div>
+</body>
+<script src="../../../刘永伟/Jquery/jquery.js"></script>
+<script src="kenan.js"></script>
+<script>
+    function Ke(){
+        this.index=0;
+        this.preve;
+        this.list();
+        this.btn();
+        $(".list").children("span").eq(0).css({background:"red"})
+    }
+    Ke.prototype.list=function(){
+        var that=this;
+
+        $(".list").children("span").on("click",function(){
+            
+            if(that.index<$(this).index()){         //当前图片往左走
+                // $("img").eq(that.index).stop().animate({left:-$("img").eq(0).width()},500)
+                // .end().eq($(this).index()).css({left:$("img").eq(0).width()}).stop().animate({left:0},500)
+                that.listMove(this,1)
+            }
+
+            if(that.index>$(this).index()){         //当前图片往右走
+                // $("img").eq(that.index).stop().animate({left:$("img").eq(0).width()},500)
+                // .end().eq($(this).index()).css({left:-$("img").eq(0).width()}).stop().animate({left:0},500)
+                that.listMove(this,-1)
+
+            }
+            // that.index=$(this).index(); // 修改当前索引
+
+            // $(".list").children("span").eq(that.index).css("background","red")  //设置list的属性
+            // .siblings().css("background","none")  
+        })
+    }
+    Ke.prototype.listMove=function(ele,type){
+        $("img").eq(this.index).stop().animate({left:-$("img").eq(0).width() *type},500)
+        .end().eq($(ele).index()).css({left:$("img").eq(0).width()*type}).stop().animate({left:0},500);
+
+        this.index=$(ele).index();
+
+        $(".list").children("span").eq(this.index).css("background","red")  //设置list的属性
+            .siblings().css("background","none") 
+    }
+
+    Ke.prototype.btn=function(){
+        var that=this;
+        $(".right").on("click",function(){
+            var taht=this;
+
+            if(that.index==$("img").length-1){
+                that.index=0;                      // 当前
+                that.preve=$("img").length-1         // 走掉的
+            }else{
+                that.index++;
+                that.preve=that.index-1;
+            }
+            that.btnMove(-1)
+            // $("img").eq(that.preve).stop().animate({left:-$("img").eq(0).width()},500)  //走掉的
+            // .end().eq(that.index).css({left:$("img").eq(0).width()}).stop().animate({left:0},500)  //进来的
+
+            // $(".list").children("span").eq(that.index).css("background","red")  //设置list的属性
+            // .siblings().css("background","none")  
+        })
+
+        $(".left").on("click",function(){
+            var taht=this;
+            if(that.index==0){
+                that.index=$("img").length-1;                      // 当前
+                that.preve=0      // 走掉的
+            }else{
+                that.index--;
+                that.preve=that.index+1;
+            }
+            that.btnMove(1)
+            // $("img").eq(that.preve).stop().animate({left:$("img").eq(0).width()},500)  //走掉的
+            // .end().eq(that.index).css({left:-$("img").eq(0).width()}).stop().animate({left:0},500)  //进来的
+
+            // $(".list").children("span").eq(that.index).css("background","red")  //设置list的属性
+            // .siblings().css("background","none")  
+
+        })
+    }
+    Ke.prototype.btnMove=function(type){
+
+        $("img").eq(this.preve).stop().animate({left:$("img").eq(0).width() *type},500)  //走掉的
+            .end().eq(this.index).css({left:-$("img").eq(0).width() *type}).stop().animate({left:0},500)  //进来的
+
+            $(".list").children("span").eq(this.index).css("background","red")  //设置list的属性
+            .siblings().css("background","none") 
+    }
+    new Ke()
+</script>
+</html>

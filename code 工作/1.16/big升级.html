@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .s_box{
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            top: 20px;
+            left: 50px;
+        }
+        .s_box img{
+            width: 300px;
+            height: 200px;
+        }
+        .s_box span{
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background:url(../名侦探柯南/ke3.jpg) no-repeat;
+            background-size: 300px 200px;
+            background-position: 0px 0px;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .s_box p{
+            width: 300px;
+            height: 200px;
+            background: #00f;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            z-index: 2;
+        }
+        .b_box{
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            left: 380px;
+            top: 20px;
+            overflow: hidden;
+            display: none;
+        }
+        .b_box img{
+            width: 600px;
+            height: 400px;
+            position: absolute;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="s_box">
+        <img src="../名侦探柯南/ke3.jpg" alt="" />
+        <span></span>
+        <p></p>
+    </div>
+    <div class="b_box">
+        <img src="../名侦探柯南/ke3.jpg" alt="" />
+    </div>
+</body>
+<script>
+    var oSbox=document.querySelector(".s_box");
+    var oSimg=document.querySelector(".s_box img");
+    var oBbox=document.querySelector(".b_box");
+    var ospan=document.querySelector(".s_box span");
+    var oimg=document.querySelector(".b_box img");
+
+    oSbox.onmouseover=function(){
+        ospan.style.display="block";
+        oBbox.style.display="block";
+        oSimg.style.opacity = 0.6
+        oSbox.onmousemove=function(eve){
+            var e=eve||window.event;
+  
+            var l=e.offsetX-(ospan.offsetWidth)/2;
+            var t=e.offsetY-(ospan.offsetHeight)/2;     //利用p标签将冒泡覆盖
+
+            if(l<=0){
+                l=0;
+            }
+            if(t<=0){
+                t=0;
+            }
+            if(l>=oSbox.offsetWidth-ospan.offsetWidth){
+                l=oSbox.offsetWidth-ospan.offsetWidth;
+                console.log(1)
+            }
+            if(t>=oSbox.offsetHeight-ospan.offsetHeight){
+                t=oSbox.offsetHeight-ospan.offsetHeight
+            }
+            ospan.style.left=l+"px";
+            ospan.style.top=t+"px";
+
+            var bl=(oBbox.offsetWidth-oimg.offsetWidth)*(l/(oSbox.offsetWidth-ospan.offsetWidth));
+            var bt=(oBbox.offsetHeight-oimg.offsetHeight)*(t/(oSbox.offsetHeight-ospan.offsetHeight));
+            oimg.style.left=bl+"px";
+            oimg.style.top=bt+"px";
+            ospan.style.backgroundPosition=-l+"px "+-t+"px"
+        }
+
+    }
+
+    oSbox.onmouseout=function(){
+        ospan.style.display="none";
+        oBbox.style.display="none";
+        oSimg.style.opacity = 1;
+    }
+
+
+
+</script>
+</html>

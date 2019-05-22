@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .ball{
+            width: 100px;
+            height: 100px;
+            background: #00f;
+            border-radius: 50%;
+            position: absolute;
+            left: 300px;
+        }
+        .box{
+            height: 800px;
+            width: 800px;
+            border: 1px solid #000;
+            position: absolute;
+            left: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ball"></div>
+    <div class="box"></div>
+</body>
+<script>
+    var oBall=document.querySelector(".ball");
+    var oBox=document.querySelector(".box");
+    var timer;
+    var speed=20;
+    var speed2=5;
+    var t=0;
+    var w=oBox.offsetLeft;
+    var y=oBox.offsetLeft;
+
+    var s=oBox.offsetHeight-oBall.offsetHeight;
+    var m=oBox.offsetWidth+oBox.offsetLeft-oBall.offsetWidth;
+
+    oBox.onclick=function(){
+        clearInterval(timer)
+        timer=setInterval(function(){
+            speed+=5;
+            t+=speed;
+            if(speed>=s-oBall.offsetTop){
+                oBall.style.top=s+"px";
+                speed=-speed //回弹
+                console.log(Math.abs(speed))
+                if(Math.abs(speed)<=1){
+                clearInterval(timer)
+            }
+            }else{
+                oBall.style.top=oBall.offsetTop+speed+"px";
+            }
+            // speed+=5;
+            w+=speed2
+            if(speed2>=m-oBall.offsetLeft){
+                oBall.style.left=m+"px";
+                speed2=-speed2;
+            }else{
+                oBall.style.left=w+"px";
+                console.log()
+            }
+            if(oBall.offsetLeft<y){
+                speed2=-speed2;
+                oBall.style.left=w+"px";
+            }
+        },30)
+    }
+</script>
+</html>

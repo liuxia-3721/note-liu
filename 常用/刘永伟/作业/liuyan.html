@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.box{
+            width: 400px;
+            background: #99f;
+            border-radius: 3px;
+            margin: 10px auto;
+            text-align: center;
+            padding: 10px;
+        }
+        .talk{
+            position: absolute;
+            border: 0;
+            outline: none;
+            top: 30px;
+            left: 100px;
+        }
+        .btn{
+            position: absolute;
+            top: 30px;
+            left: 300px;
+        }
+       
+        div.alt{
+            width: 400px;
+            height: 280px;
+            position: absolute;
+            top:100px;
+            left: 100px;
+            /* display: none; */
+            background: rgba(222, 222, 222, 0.6);
+        }
+        div.alt p{
+            background: #ff9;
+            margin: 0;
+            cursor: pointer;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+        div.alt p span{
+            position: absolute;
+            width: 50px;
+            height: 25px;
+            right: 5px;
+            background: #f99;
+        }
+      
+        div.alt .cont{
+            background: #fff;
+            width: 360px;
+            height: 220px;
+            margin: 3px auto;
+            display: block;
+            resize: none;
+            overflow: auto;
+            font-size: 30px;
+        }
+        div.alt .sub{
+            position: absolute;
+            width: 80px;
+            height: 20px;
+            border-radius: 3px;
+            border: 0;
+            outline: none;
+        }
+        div.alt .sub1{
+            bottom: 5px;
+            left: 50px;
+            background: #f99;
+        }
+        div.alt .sub2{
+            bottom: 5px;
+            right: 50px;
+            background: #99f;
+        }
+        .changdu{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 500px;
+            height: 200px;
+            background: #88a;
+            opacity: 0.6;
+            box-shadow: 2px 2px 2px;
+            font-size: 50px;
+            padding: 10px;
+            display: none;
+        }
+        .zhao{
+            position: absolute;
+            left: 0;right: 0;top: 0;bottom: 0;
+            background: rgba(0, 0, 0, .3);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        你们好，我是留言板。
+    </div>
+    <div class="box">
+        你们好，我是留言板。
+    </div>
+    <div class="box">
+        你们好，我是留言板。
+    </div>
+    <div class="box">
+        你们好，我是留言板。
+    </div>
+    <div class="box">
+        你们好，我是留言板。
+    </div>
+    <input type="button" value="点击留言" class="btn"/>
+<!-- /// -->
+    <div class="zhao">
+        <div class="alt">
+            <p class="move">弹出窗口<span>X</span></p>
+            <textarea name="" id="" cols="30" rows="10" class="cont"></textarea>
+            <input type="submit" value="确认"  class="sub sub1"/>
+            <input type="submit" value="取消"  class="sub sub2"/>
+        </div>
+    </div>
+
+    <div class="changdu">字符内容过长，请修改后再次确认。</div>
+</body>
+<script>
+    var omove=document.querySelector(".move");
+    var zhaozi=document.querySelector("div.zhao");
+    var alt=document.querySelector("div.alt");
+
+    var obtn=document.querySelector(".btn");
+    var ox=document.querySelector(".move span");
+    var osub1=document.querySelector(".sub1");
+    var osub2=document.querySelector(".sub2");
+    var otex=document.querySelector(".cont");
+    var obody=document.querySelector("body");
+    var olength=document.querySelector(".changdu")
+    
+    omove.onmousedown=function(eve){
+       
+        var e=eve||window.event;
+        e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+        var x=e.offsetX;
+        var y=e.offsetY ;
+        document.onmousemove=function(eve){
+            var e=eve||window.event;
+            e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+            alt.style.left=e.clientX-x+"px"
+            alt.style.top=e.clientY-y+"px";
+        }
+        // console.log(ox)
+    }
+    alt.onmouseup=function(eve){
+        var e=eve||window.event;
+        e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+        document.onmousemove=null;
+    }
+    obtn.onclick=function(){
+        zhaozi.style.display="block";
+    }
+    ox.onclick=function(eve){
+        var e=eve||window.event;
+        e.stopPropagation();
+        // console.log(1)
+        otex.value="";
+        zhaozi.style.display="none";
+    }
+    osub1.onclick=function(eve){
+        var e=eve||window.event;
+        e.stopPropagation();
+
+        var odiv=document.createElement("div");
+        odiv.className="box";
+        odiv.innerHTML=otex.value;
+        
+        var str=otex.value;
+        if(str.length<=160){
+            obody.appendChild(odiv);
+            otex.value="";
+            zhaozi.style.display="none";
+        }else{
+            olength.style.display="block"
+
+            setTimeout(function(){
+                olength.style.display="none"
+            },1500)
+        }
+    }
+    osub2.onclick=function(eve){
+        var e=eve||window.event;
+        e.stopPropagation();
+
+        otex.value="";
+        zhaozi.style.display="none";
+    }
+
+</script>
+</html>

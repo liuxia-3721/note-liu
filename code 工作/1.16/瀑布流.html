@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .cont{
+            margin: 0 auto;
+            position: relative;
+        }
+        img{
+            width: 200px;
+            vertical-align: middle;
+        }
+        .box{
+            padding: 10px;
+            float: left;
+        }
+        .box .imgbox{
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 6px;
+        }
+     
+    </style>
+    <script>
+    window.onload=function(){
+        var ocont=document.querySelector(".cont");
+        var obox=document.querySelectorAll(".box");
+
+        var oboxWidth=document.documentElement.clientWidth;
+        var x=Math.floor(oboxWidth/obox[0].offsetWidth);
+        
+        ocont.style.width=x*obox[0].offsetWidth+"px";//让cont居中
+        
+        var heightArr=[];
+
+        for(var i=0;i<x;i++){
+            console.log(obox[i].offsetHeight)
+            heightArr.push(obox[i].offsetHeight);
+        }
+        console.log(heightArr)
+
+        for(var i=x;i<obox.length;i++){
+            
+            var min=getMin(heightArr);           //获得第一行的最小高度
+            var minIndex=heightArr.indexOf(min); //得到最小高度的索引
+
+            obox[i].style.position="absolute";
+            obox[i].style.top=min+"px";
+            obox[i].style.left=minIndex*obox[0].offsetWidth+"px";
+
+            heightArr[minIndex]=heightArr[minIndex] + obox[i].offsetHeight;
+        }
+    }
+    function getMin(arr){
+        var a=arr.map(function(value){
+            return value;
+        })
+        return a.sort(function(a,b){return a-b})[0];
+    }
+    </script>
+</head>
+<body>
+    <div class="cont">
+        <div class="box">
+            <div class="imgbox">
+                <img src="one.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="two.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="three.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="four.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="five.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="six.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="seven.jpg" alt="">
+            </div>
+        </div>
+          <div class="box">
+            <div class="imgbox">
+                <img src="five.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="six.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="seven.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="six.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="seven.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="six.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="imgbox">
+                <img src="seven.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+﻿
+中间件(middleware)： 原理-实现
+	body-parser
+	中间件:	npmjs.com   查看使用方式
+	body-parser			获取post数据，限定大小，约定返回数据类xx.urlencode({limit:xx})
+
+----------------------------------------------------------------
+cookie-session: 用户唯一性，自动登录
+
+用户和服务器交互通过什么?   http协议,http是无状态的
+	通过IP(公司环境)
+	通过浏览器保存一些信息，每次访问服务器带过去
+		如何保存信息给浏览器:
+			1. 前端种cookie/localstorage
+			2. 后端种: 前端请求后端，后端给前端种cookie(加了密)的同时，在服务器上生成seesion
+服务器给浏览器种只种cookie:  cookie-parser
+服务器给浏览器种cookie的同时在服务器上生成seesion:   cookie-session
+
+----------------------------------------------------------------
+
+multer:  文件上传
+	bodyParser -> req.body -> fs.writeFile()-->
+	multer->文件名会随机->fs模块改名->path系统模块解析磁盘路径
+
+	文件上传：前端表单->后端接收到文件本身->保存到服务器上->给数据库记录文件一些信息->库返回给nodejs相关信息->nodejs返回给前端
+			前端: file enctype="multipart/form-data"
+			后端：body-parser 接受 urlencode编码数据 ,数据回来的是字符
+			      multer 接受的是 form-data 流
+
+		配置
+		let multer  = require('multer');	引入
+		let objMulter = multer({ dest: './upload' });	实例化  返回 multer对象
+			dest: 指定 保存位置（存到服务器)
+		app.use(objMulter.any());  	any 允许上传任何文件
+
+		req.files	数组
+			fieldname: 表单name名 | formData 的key
+			originalname: 上传的文件名
+			encoding： 编码方式
+			mimetype: 文件类型
+			buffer: 文件本身
+			size：尺寸
+			destination: 保存路径
+			filename： 保存后的文件名  不含后缀
+			path：	保存磁盘路径+保存后的文件名 不含后缀
+fs模块:  操作是异步的
+	fs.rename('当前文件','该后的文件名',(err)=>{});
+path 系统模块
+		path.parse('c:\\wamp\\xx.png');	磁盘路径(str -> obj)
+			{
+			   root: 'c:\\', 盘符
+			   dir: 'c:\\wamp', 目录
+			   base: 'xx.png',  文件名
+			   ext: '.png', 扩展名
+			   name: 'xx' 	文件，不含扩展名
+			}
+		path.join('磁盘路径1','磁盘路径2')
+			__dirname 魔术变量  返回当前文件所在的磁盘路径
+
+
+		path.dirname == __dirname   当前文件位置
+
+		path.resolve('磁盘路径1','磁盘路径2') 合并磁盘片段,右到左找根，左到右拼接
+
+
+mysql: 关系数据库(二维表(表头))
+	数据库：需要安装服务
+		服务：
+			a) 安装wamp 开启 mysql服务
+			b) 安装mysql 开启服务
+	库操作：
+		客户端：软件操作(UI工具)
+			wamp的客户端是phpmyadmin
+			navicat 收费
+			nodeJs(后台管理程序),依赖mysql库(https://www.npmjs.com/package/mysql)
+	链接库：
+		wamp\mysql
+		c:P..G..\mysql
+	库操作  编码方式 UUC
+		建|删 库(目录)
+		建:	CREATE DATABASE  `2017-12-6` DEFAULT CHARACTER SET armscii8 COLLATE armscii8_general_ci;
+		建|删|改 表(文件)
+			创建表头(字段头)
+			CREATE TABLE  `2017-12-6`.`user` (
+			`name` VARCHAR( 32 ) NOT NULL ,
+			`age` INT( 3 ) NOT NULL ,
+			`address` VARCHAR( 128 ) NOT NULL
+			) ENGINE = INNODB
+	表操作	增删改查
+		增：
+			INSERT INTO 表 (字段列表) VALUES(值列表)
+			INSERT INTO user (name,age,address) VALUES('苏菲',38,'')
+		删:
+			DELETE FROM 表 WHERE 字段名=值
+			DELETE FROM user WHERE name='alex'
+		改:
+			UPDATE 表 SET 字段名=值 WHERE 字段名=值
+			UPDATE user set name='sufei' WHERE name='苏菲'
+		查:
+			SELECT ? FROM 表
+			SELECT * FROM user  查所有
+
+
+
+自学：cookie-parser中间件
+前端上传用户信息,要求存库，并返回给浏览器，做展示

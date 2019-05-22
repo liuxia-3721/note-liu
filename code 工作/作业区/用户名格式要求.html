@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    请输入用户名：<input type="text" id="tex" value=""/>
+    <input type="button" id="btn" value="确认"/>
+</body>
+<script>
+var otex=document.getElementById("tex")
+var obtn=document.getElementById("btn")
+
+obtn.onclick=function(){
+    var str=otex.value;
+    if(str==""||str[0]==" "){
+        return console.log("用户名不能为空,请重新输入;还有！空格也不能开头的")
+    }
+    if(parseInt(str[0])==Number(str[0])){
+        return console.log("不能用数字开头，傻瓜。")
+    }
+    if(otex.value.length<6||otex.value.length>20){
+        return console.log("太长了或者太短了，你看着改吧")
+    }
+ 
+}
+
+</script>
+</html>

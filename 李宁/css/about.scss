@@ -1,0 +1,60 @@
+.join{
+    width: 80%;
+    margin: 0 auto;
+    color: #f00;
+    font-size: 26px;
+    background: #338;
+    padding: 20px;
+    h3{
+        text-align: center;
+        padding: 0 5px 15px;
+    }
+    .rec{
+        width: 800px;
+        margin: 0 auto;
+        
+        dl{
+            dt{
+                color: darksalmon;
+            }
+            dd{
+                margin: 20px 0;
+                border: 1px solid #55f;
+                padding: 10px;
+                span{
+                    color: #ff0;
+                }
+                p{
+                    color: #ff9;
+                }
+                i{
+                    color: #0f0;
+                    font-style: normal;
+                    font-size: 20px;
+                }
+                .treatment{
+                    padding-left: 30px;
+                    font-size: 16px;
+                    width: 80%;
+                    margin: 10px 50px;
+                    padding: 4px 0;
+                    color: #ff9;
+                    box-shadow: 1px 1px 1px ;
+                }
+            }
+        }
+        p{
+            padding: 10px;
+            text-indent: 20px;
+        }
+        .date{
+            font-size: 20px;
+            color: #f55;
+        }
+        .num{
+            font-size: 20px;
+            color: #f77;
+            
+        }
+    }
+}

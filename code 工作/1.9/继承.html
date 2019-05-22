@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+//call apply 继承  修改this的指向，缺点：只能继承构造函数，不能继承原型
+// function Father(s1){
+//     this.skill=s1;
+//     this.show=function(){
+//         console.log(this.skill)
+//     }
+// }
+
+// function Son(s2){
+//     Father.call(this,s2)
+// }
+// var f=new Father("乔丹");
+// var s=new Son("科比");
+// f.show();
+// s.show();
+
+//原型继承 只能继承原型，不能继承构造函数
+// function Father(){};
+// Father.prototype.show=function(s1){
+//     this.skill=s1;
+//     console.log(this.skill)
+// }
+// function Son(){};
+// for(var i in Father.prototype){     //深拷贝
+//     Son.prototype[i]=Father.prototype[i]
+// }
+// // Son.prototype.show=function(){
+// //     console.log("heh")
+// // }
+// var f=new Father()
+// f.show("乔丹")
+// var s=new Son()
+// s.show("科比")
+//混合继承： 利用call/apply继承构造函数，利用原型继承原型
+// function Father(s1){
+//     this.skill=s1;
+// }
+// Father.prototype.show=function(){
+//     console.log(this.skill)
+// }
+// function Son(s2){
+//     Father.call(this,s2)
+// }
+// for(var i in Father.prototype){
+//     Son.prototype[i]=Father.prototype[i]
+// }
+// var f=new Father("乔丹");
+// f.show();
+// var s=new Son("科比");
+// s.show()
+
+//原型链继承 给子对象设置一个原型链为夫对象的实列
+// function Father(a){
+//     this.s1=a
+// }
+// Father.prototype.show=function(){
+//     console.log(this.s1)
+// }
+
+
+// function Son(){};
+// Son.prototype=new Father("科比");
+
+
+// var f=new Father("乔丹");
+// f.show();
+// var s=new Son();
+// s.show()
+//ES6 继承
+class Father{
+    constructor(s1){
+        this.skill=s1;
+    }
+    show(){
+        console.log(this.skill)
+    }
+}
+class Son extends Father{
+    constructor(s1){
+        super(s1)
+    }
+}
+var f=new Father("乔丹");
+f.show()
+
+var s=new Son("科比");
+s.show()
+</script>
+</html>

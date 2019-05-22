@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #00f;
+            margin: 0 auto;
+        }
+        #come{
+            margin:85px 0 0 0;
+            width: 0;
+            padding: 0;
+            height: 30px;
+            background: #f00;
+            font:12px/30px "";    
+            text-align: center;        
+            }                                                                                                                                                                                                                                                                                                                                     }
+    </style>
+</head>
+<body>
+    <div>
+        <p id="come"></p>
+    </div>
+</body>
+<script>
+    var s=0;
+    var w=200;
+    var speed=3;
+    var ocome=document.getElementById("come")
+    var timer;
+    timer=setInterval(
+        (jindu),20
+    )
+    function jindu(){
+        if(w-s<speed){
+            ocome.style.width=w+"px";
+            clearInterval(timer)
+            ocome.innerHTML=100+"%";
+            var x=prompt("给你的角色取个名字吧")
+            if(x){
+                location.href="http://nba.com"
+            }
+        }else{
+            s+=speed;
+            ocome.style.width=s+"px";
+            ocome.innerHTML=Math.round(s/w*100)+"%"
+        }
+     
+    }
+    
+</script>
+</html>

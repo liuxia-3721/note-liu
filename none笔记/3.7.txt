@@ -1,0 +1,70 @@
+----------------------------------------------------------------
+
+渲染页面(模板引擎):
+	前端：dom操作				虚拟dom操作	二次渲染，后期多次渲染， 优点：局部渲染
+		  jq/js/angualrJs		vue/react/.......   渲染页面(数据整合到静态页面)
+	后端：
+		  抓取前端静态页面 + 渲染引擎 + 数据  返回data ->  send(data)
+		  渲染引擎: jade / ejs / ....
+
+	arttemplate  underscore baiduTemplate mustach .......
+
+-------------------------------------------------------------
+ejs：	模板渲染是异步的
+	非侵入式，温和，弱依赖
+
+	ejs.render(str)  返回  str
+	ejs.renderFile('ejs模板',{数据},回调(err,data))	data == str
+
+	ejs模板语法：
+		ejs 结构就是html
+		输出:	<%= 数据名|属性名|变量名 + 表达式 %>
+		语句：	<% 语句 %>  需要被<%  %>  包裹
+		非转义输出:	<%- 数据名|变量名  + 表达式 %>
+
+		https://www.npmjs.com/package/ejs
+
+-------------------------------------------------------------
+管理多个模板引擎	consolidate
+	安装: npm i consolidate -S
+	注意: ejs 需要安装，但无需引入
+
+	app.set('view.engine','html');	模板最终	输出类型设置
+	app.set('views','./views');		引擎模板目录设置
+
+	app.engine('html',consolidate.ejs);	输出与引擎匹配
+	app.engine('css',consolidate.jade);	输出与引擎匹配
+
+	渲染API：
+	res.render('模板文件名',{数据}) 整合页面和数据，完成渲染，发往浏览器
+
+
+-------------------------------------------------------------
+
+路由(router):  告诉你去哪
+	前端：导向 路由就告诉你应该去哪
+	后端: 子服务	一个路由就是一个小的服务(server/app)
+
+	创建路由
+		router = express.Router();  返回路由对象
+		app.use('地址,接口',router); 响应的处理过程给了router(子服务)
+
+		处理过程：
+		router.get('/',fn)
+		router.get('/1',fn)
+		router.get('/2',fn)
+	router.use(处理当前路由的中间件) 需要next 延续
+	router.all('*',当前router路由下的验证工作) 需要next 延续
+
+-----------------------------------------------------------------
+脚手架： http://www.expressjs.com.cn/starter/generator.html
+	干嘛的：自动搭建项目环境的，无需手动
+		命令行： 脚手架名称 目录 回车
+	安装：需要安装到全局
+		npm install express -g   验证 express -h
+		提示错误:	npm install express-generator -g
+	创建项目:
+		express -e 目录 | express -f  创建到当前命令行所在的目录
+		cd 目录
+		npm install 		安装依赖包
+		npm start    -> node ./bin/www

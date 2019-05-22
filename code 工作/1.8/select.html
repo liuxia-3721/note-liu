@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+           margin:0 auto;
+        }
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+        ul li.active{
+            background: #77f;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="text" class="tex"/>
+        <ul>
+            <li>1、湖人</li>
+            <li>2、76人</li>
+            <li>3、骑士</li>
+            <li>4、勇士</li>
+            <li>5、爵士</li>
+        </ul>
+
+    </div>
+</body>
+<script>    
+    function Select(){
+        this.tex=document.querySelector(".tex");
+        this.ul=document.querySelector("ul");
+        this.li=document.querySelectorAll("li");
+
+        this.index=-1;
+        this.block();
+    }
+    Select.prototype.block=function(){
+        var that=this;
+        this.tex.onclick=function(eve){
+            var e=eve||window.event;
+            e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+
+            that.ul.style.display="block";
+            that.shubiao()
+            that.key()
+        }
+        document.onclick=function(){
+            that.ul.style.display="none";
+        }
+    }
+    Select.prototype.shubiao=function(){
+        var that=this;
+        
+        for(var i=0;i<this.li.length;i++){
+            this.li[i].setAttribute("abc",i)
+
+            this.li[i].onmouseover=function(){
+                this.className="active";
+            }
+            this.li[i].onmouseout=function(){
+                this.className="none";
+            }
+            this.li[i].onclick=function(eve){
+                
+                var e=eve||window.event;
+                var target=e.target||srcElement;
+                that.tex.value=this.innerHTML;
+                that.ul.style.display="none";
+
+                that.index=this.getAttribute("abc");
+            }
+        }
+    }
+    Select.prototype.key=function(){
+        var that=this;
+
+        this.tex.onkeydown=function(eve){
+            var e=eve||window.event;
+            var code=e.keyCode||e.which;
+            
+            if(code==40){
+
+                if(that.index==that.li.length-1){
+                    that.index=0;
+                }else{
+                    that.index++
+                }
+                for(var i=0;i<that.li.length;i++){
+                    that.li[i].className="";
+                }
+                that.li[that.index].className="active"
+            }
+            if(code==38){
+
+                if(that.index==0||that.index==-1){
+                    that.index=that.li.length-1;
+                }else{
+                    that.index--
+                }
+                for(var i=0;i<that.li.length;i++){
+                    that.li[i].className="";
+                }
+                that.li[that.index].className="active"
+            }
+            if(code==13){
+                that.tex.value=that.li[that.index].innerHTML;
+                that.ul.style.display="none";
+                that.tex.blur();    
+            }
+        }
+    }
+    new Select();
+
+</script>
+</html>

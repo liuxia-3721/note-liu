@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+         .box{
+            background: #227;
+            width: 300px;
+            height: 200px;
+            position: absolute;
+        }
+        .box p{
+            width: 300px;
+            height: 50px;
+            background:#00f;
+            margin: 0;
+            padding: 0;
+            line-height: 50px;
+        }
+        .box .box2{
+            background: tomato;
+            width: 300px;
+            height: 150px;
+        }
+        
+    
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p>
+            <span>回放</span>
+        </p>
+        <div class="box2"></div>
+    </div>
+</body>
+<script>
+    var obox=document.querySelector(".box");
+    var op=document.querySelector("p");
+    var ospan=document.querySelector("span");
+// window.onload=function(){
+    var arr=[]
+    ospan.onmousedown=function(eve){
+        var e=eve||window.event;
+        e.stopPropagation();
+    }
+    op.onmousedown=function(eve){
+        arr=[];
+        var e=eve||window.event;
+        
+        var l=e.offsetX;
+        var t=e.offsetY;
+        document.onmousemove=function(eve){
+            var e=eve||window.event;
+            obox.style.top=e.clientY-t+"px";
+            obox.style.left=e.clientX-l+"px";
+            arr.push({left:obox.offsetLeft,top:obox.offsetTop})
+        }
+    }
+    document.onmouseup=function(){
+        document.onmousemove=null;
+    }
+
+    // op.onmousedown = function(evt){
+	// 	evt.stopPropagation();
+	// }
+    ospan.onclick=function(){
+        console.log(arr)
+        var index=arr.length-1;
+     
+        var timer=setInterval(function(){
+            if(index < 1) {
+				clearInterval(timer);
+            }else{
+                obox.style.left = arr[--index].left+"px";
+                obox.style.top = arr[--index].top+"px";
+            }
+        },50)
+        
+    }
+// }
+</script>
+</html>

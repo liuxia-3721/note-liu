@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        form{
+            width: 500px;
+            height: 550px;
+            border: 1px solid #00f;
+            margin: 0 auto;
+        }
+        form #box{
+            width: 480px;
+            height: 320px;
+            border: 1px dashed #99f;
+            margin: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        form #tex{
+            display: block;
+            resize:none;
+            width: 480px;
+            margin: 10px;
+            outline: none;
+            padding: 5px;
+            box-sizing: border-box;
+            font: 18px/20px "";
+            color: #88f;
+        }
+         form #btn{
+            font: 16px "";
+            color: #f00;
+            margin-left:440px;
+        } 
+        #box li{
+            list-style-type: none;
+            margin: 10px;
+            padding: 2px;
+            outline: none;
+            border-radius:5px;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+        }
+        #box li:nth-child(even){
+            justify-content: flex-end;
+        }
+        #box li span{
+            background: #00f;
+            padding: 5px;
+            border-radius: 5px;
+        }
+     
+    </style>
+</head>
+<body>
+    <form action="">
+        <ul id="box">
+      
+        </ul>
+        <textarea name="" id="tex" rows="7"></textarea>
+        <input type="button" value="发送" id="btn"/>
+    </form>
+</body>
+<script>
+    var obox=document.getElementById("box");
+    var obtn=document.getElementById("btn");
+    var otex=document.getElementById("tex");
+    obtn.onclick=function(){
+            //obx.oscrollIntoView() 
+            send()
+    }
+ otex.onkeydown=function(eve){
+        var e=eve||window.event;
+        var ev=e.keyCode;
+        if(ev==13){
+            send()
+            otex.blur();
+        }
+    }
+
+
+
+
+
+    function send(){
+        if(otex.value==""){
+                alert("内容不能为空")
+            }else{
+            var pp=document.createElement("li");
+            var ospan=document.createElement("span");
+            pp.appendChild(ospan);
+            ospan.innerHTML=otex.value;
+            obox.appendChild(pp);
+            otex.value="";
+            }
+            obox.scrollTop = obox.scrollHeight;
+    }
+   
+    
+
+</script>
+</html>

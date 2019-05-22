@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        a{
+            display: block;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        div.box{
+            width: 100px;
+            height: 50px;
+            padding: 5px;
+            background: #0f0;
+            position: absolute;
+            display: none;
+            z-index: 100;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="news">1、深更半夜，为何母猪会发出惨叫?
+        <div class="box">
+            呵呵~~~~~
+        </div>
+    </a>
+    
+    <a href="#" class="news">2、到底是什么原因，让这个高级教授甘愿任一个农名老伯为老师。
+        <div class="box">
+            嗯嗯~~~~~
+        </div>
+    </a>
+    <a href="#" class="news">3、追了这么多年，小兰和柯南终于在一起了。呜呜~~~~
+        <div class="box">
+            名侦探~~~~~
+        </div>
+    </a>
+</body>
+<script>
+var onews=document.querySelectorAll(".news");
+for(var i=0;i<onews.length;i++){
+    lala()
+}
+
+function lala(){
+    var onew=onews[i];
+    onew.onmousemove=function(eve){
+        var obox=this.firstElementChild;
+        obox.style.display="block";
+        var e=eve||window.event;
+        // var y=getComputedStyle(this,false).height;
+        // var x=e.offsetX;
+        // obox.style.top=y;
+        // obox.style.left=x+"px";
+     
+
+        obox.style.top= e.clientY - this.offsetTop + "px";
+        console.log(e.clientY)
+        obox.style.left=e.clientX - this.offsetLeft + "px";
+    }
+    onew.onmouseout=function(){
+        var obox=this.firstElementChild;
+        obox.style.display="none";
+    }   
+}
+
+
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            margin: 0 auto;
+            border: 1px solid #00f;
+            border-radius: 50%;
+            font: 60px/200px "";
+            text-align: center;
+            width: 200px;
+            height: 200px;
+        }
+        #btn{
+            display: block;
+            margin: 20px auto;
+            font: 40px "";
+        }
+    </style>
+</head>
+<body>
+    <div id="box">7</div>
+    <input type="button" id="btn" value="开始"/>
+</body>
+<script>
+
+// var obox=document.getElementById("box");
+// var obtn=document.getElementById("btn");
+// var n=obox.innerHTML;
+// var t;
+// obtn.onclick=function(){
+//     clearInterval(t)
+//     t=setInterval(function(){
+//         if(n<=0){
+//             clearInterval(t)
+//         }else{
+//             obox.innerHTML= --n;
+//         } 
+//     },1000)
+// }
+//上面的没有停止功能
+
+var onOff=1;
+var obox=document.getElementById("box");
+var obtn=document.getElementById("btn");
+var n=obox.innerHTML;
+var t;
+obtn.onclick=function(){
+    if(onOff==1){
+            clearInterval(t)
+            t=setInterval(function(){
+                if(n<=0){
+                    clearInterval(t)
+                }else{
+                    obox.innerHTML= --n;
+                } 
+            },1000)
+            onOff=2;
+            obtn.value="暂停"
+    }else{
+        clearInterval(t);
+            onOff=1;        
+            obtn.value="继续"
+    }
+}
+</script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.box{
+            width:400px;
+            height: 500px;
+            border: 1px solid #00f;
+            margin: 0 auto;
+        }
+        div.box1{
+            width: 380px;
+            height: 300px;
+            margin: 10px;
+            border: 2px solid #f99;
+            box-sizing: border-box;
+            padding: 5px;
+            overflow: auto;
+        }
+        div.box1 span {
+            display: block;
+            height: 30px;
+            line-height: 30px;
+        }
+        div.box1 :nth-child(odd){
+            text-align: right;
+        }
+        div.box1 :nth-child(even){
+            text-align: left;
+        }
+        
+        div.box textarea.tex{
+            width: 380px;
+            height: 130px;
+            display: block;
+            margin: 10px;
+            resize: none;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        div.box input.btn{
+            display: block;
+            width: 60px;
+            height: 25px;
+            margin-left: 330px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="box1"></div>
+        <textarea name="" id="" cols="30" rows="10" class="tex"></textarea>
+        <input type="button" value="发送" class="btn"/>
+    </div>
+</body>
+<script>
+    var obtn=document.querySelector(".btn");
+    var otex=document.querySelector(".tex");
+    var obox=document.querySelector(".box1")
+    obtn.onclick=function(){
+        if(otex.value){
+            var span=document.createElement("span")
+            span.innerHTML=otex.value;
+            obox.appendChild(span);
+            otex.value="";
+            obox.scrollTop=obox.scrollHeight
+        }else{
+            console.log("内容不允许为空")
+        }
+    }
+    document.onkeydown=function(eve){
+        var e=eve||window.event;
+        var keycode=e.keyCode||e.which;
+        
+            if(keycode==13){
+                e.preventDefault();
+                if(otex.value){
+                    var span=document.createElement("span")
+                    span.innerHTML=otex.value;
+                    obox.appendChild(span);
+                    otex.value="";
+                    obox.scrollTop=obox.scrollHeight 
+                }else{
+                    otex.value=""
+                    console.log("内容不能为空");
+                }
+               
+            }
+        
+        
+    }
+</script>
+</html>

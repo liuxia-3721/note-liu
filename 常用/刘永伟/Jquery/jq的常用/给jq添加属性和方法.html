@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //  $.extend(obj,obj2)  obj 也会拥有 obj2 的属性和方法
+      
+    // $.extend(obj)   $.extend({nav:function(){}})    jQuery 会拥有 obj的属性和方法（ 全局 ）
+
+
+
+    // $.extend($.fn,{       给 jquery 绑定 ( 局部 )的方法或者属性 
+
+    //      nav:function()
+
+    // })    <==>  $.fn.nav=function( ){  } <==> $.fn.extend({ nav :function(){ }})
+
+    // $().nav()  执行 ↑↑↑↑
+
+    //$.nav=function(){ }   强行给jq 添加一个 (全局) 的nav函数
+
+    // 基本类型  Number string boolean undefined    
+    // 引用类型 Object null Array function 
+    function fn(){
+        console.log(1)
+    }
+    console.log(typeof fn)
+    undefined 
+    null
+</script>
+</html>

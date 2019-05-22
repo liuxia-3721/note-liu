@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 400px;
+            height: 280px;
+            margin: 0 auto;
+            background: #88f;
+            overflow: hidden;
+            position: relative;
+        }
+        .box .img{
+            width: 2000px;
+            height: 280px;
+            margin: 0 auto;
+            background: #88f;
+            position: absolute;
+        }
+       .img img{
+            width: 400px;
+            height: 280px;
+            vertical-align: middle;
+            float: left;
+        }
+        .box input{
+            width: 40px;
+            height: 30px;
+            position: absolute;
+            top: 140px;
+         
+        }
+        .box input.right{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="img">
+            <img src="../名侦探柯南/ke0.jpg" alt="">
+            <img src="../名侦探柯南/ke1.jpg" alt="">
+            <img src="../名侦探柯南/ke2.jpg" alt="">
+            <img src="../名侦探柯南/ke3.jpg" alt="">
+            <img src="../名侦探柯南/ke0.jpg" alt="">
+
+        </div>
+        <input type="button" value=">>>" class="right"/>
+        <input type="button" value="<<<" class="left"/>
+    </div>
+</body>
+<script src="../../js工具箱/move.js"></script>
+<script>
+    function Banner(){
+
+       this.oimg=document.querySelector(".img");
+       this.arr=document.querySelectorAll("img");
+       this.oright=document.querySelector(".right");
+       this.oleft=document.querySelector(".left");
+        
+       this.index=0;
+       this.bannerMove()
+    }
+
+
+    Banner.prototype.bannerMove=function(){
+        var that=this;
+        this.oright.onclick=function(){
+            that.rlMove(1)
+        }
+        
+        this.oleft.onclick=function(){
+            that.rlMove(2)
+        }
+    }
+
+
+
+    Banner.prototype.rlMove=function(type){
+        
+        if(type==1){
+
+            if(this.index==this.arr.length-1){
+     
+                 this.oimg.style.left=0;
+                 this.index=1;
+                 move(this.oimg,{"left":this.arr[0].offsetWidth*(-this.index)})
+            }else{
+                
+                 this.index++;
+                 move(this.oimg,{"left":-this.arr[0].offsetWidth*this.index})
+            }
+        }else{
+
+            if(this.index==0){
+                this.oimg.style.left=-this.arr[0].offsetWidth*(this.arr.length-1)+"px";
+                this.index=this.arr.length-2;
+                move(this.oimg,{left:-this.arr[0].offsetWidth*this.index})
+            }else{
+    
+                this.index--;
+                move(this.oimg,{left:-this.arr[0].offsetWidth*this.index})
+            }
+        }
+    
+
+    }
+
+    new Banner;
+
+
+</script>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            html,body{
+                -webkit-user-select:none;
+            }
+        ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #menu{
+            margin: 0 auto;
+            display: flex;
+        }
+        #menu>li{
+            flex: 1;
+            width: 100px;
+            border: 1px solid #00f;
+            display: flex;
+            position: relative;
+        }
+        #menu>li>span{
+            flex: 8;
+            text-align: center
+        }
+        #menu>li>b{
+            flex: 2;
+            background: #f77;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 10px 0 0 10px;;
+        }
+        #menu>li .son{
+            list-style: none;
+            width: 100%;
+            height: 200px;
+            position: absolute;
+            top: 100%;
+        }
+        #menu>li .son>li{
+            text-align: center;
+            border: 1px solid #777;
+            display: flex;
+            position: relative;
+        }
+        #menu>li .son>li span{
+            flex: 7;
+            text-align: center;
+
+        }
+        #menu>li .son>li i{
+            text-align: center;
+            flex: 1;
+            cursor: pointer;
+            font-style: normal;
+        }
+        #menu>li .son>li u{
+            text-align: center;
+            flex: 1;
+            cursor: pointer;
+            font-style: normal;
+        }
+        #menu>li .son>li b{
+            text-align: center;
+            flex: 1;
+            cursor: pointer;
+        }
+        #data{
+            margin: 0 atuo;
+            color: #00f;
+            margin-top: 100px;
+        }
+        .box{
+            padding: 20px;
+            position:fixed;
+            width: 200px;
+            height: 200px;
+            background: #eee;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: none;
+        }
+        .box .xxbox{
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        .box .xxbox i{
+            font-style: normal;
+            background: #f77;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .box .xxbox b{
+            font-style: normal;
+            background: #0f0;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li>
+            <span >拿手菜</span>
+            <b class="add">+</b>
+            <ul class="son">
+                <!-- <li>1</li>
+                <li>1</li>
+                <li>1</li> -->
+            </ul>
+
+
+        </li>
+        <li>
+            <span>刚学的</span>
+            <b class="add">+</b>
+            <ul class="son">
+                <!-- <li><span>1</span> <u></u> <i>删除</i><b>添加</b></li>
+                <li><span>1</span> <u></u> <i>删除</i><b>添加</b></li>
+                <li><span>1</span> <u>价格</u> <i>删除</i><b>添加</b></li> -->
+            </ul>
+        </li>
+        <li>
+            <span>妈妈的菜</span>
+            <b class="add">+</b>
+           <ul class="son">
+                <!-- <li>1</li>
+                <li>1</li>
+                <li>1</li> -->
+            </ul>
+        </li>
+    </ul>
+    <div class="box">
+        <ul>
+            <li>
+                <span>菜名：</span><input type="text"/>
+            </li>
+            <li>
+                <span>价格：</span><input type="number"/>
+            </li>
+            <li class="huohao">
+                <span>货号：</span><input type="number"/>
+            </li>
+            <li id="tipp">
+            </li>
+        </ul>
+        <div class="xxbox">
+            <b>确认</b>
+            <i>取消</i>
+        </div>
+    </div>
+
+    
+</body>
+<script src="jquery.js"></script>
+<script>
+    var json = [{
+    "type_id":1,
+    "name":"拿手菜",
+    "food":[{
+        "food_id":1,
+        "name":"鱼香肉丝",
+        "price":"10"
+    },{
+        "food_id":2,
+        "name":"红烧肉",
+        "price":"13"
+    },{
+        "food_id":3,
+        "name":"香辣粉",
+        "price":"12"
+    }]
+},{
+    "type_id":2,
+    "name":"刚学的",
+    "food":[{
+        "food_id":4,
+        "name":"小炒肉",
+        "price":"13"
+    },{
+        "food_id":5,
+        "name":"混沌",
+        "price":"14"
+    }]
+},{
+    "type_id":3,
+    "name":"妈妈的菜",
+    "food":[{
+        "food_id":6,
+        "name":"土豆丝",
+        "price":"8"
+    },{
+        "food_id":7,
+        "name":"拍黄瓜",
+        "price":"9"
+    }]
+}]
+
+function Menu(options){
+    this.caidan = options.caidan;
+    this.num;
+    this.load();
+    this.move();
+    this.add();
+    this.say();
+}
+Menu.prototype.load=function(){
+
+
+    
+    for(var i=0;i<this.caidan.length;i++){
+
+        // console.log(this.caidan[i].food)
+        var str="";
+
+        for(var j=0;j<this.caidan[i].food.length;j++){
+            str+=`
+                <li num="${this.caidan[i].food[j].food_id}";>
+                    <span>${this.caidan[i].food[j].name}</span> 
+                    <u>${this.caidan[i].food[j].price}</u> 
+                    <i>删除</i>
+                    <b>移动</b>
+                </li>
+                `
+        }
+        $(".son").eq(i).html(str)
+    }
+
+
+    this.display()
+}
+Menu.prototype.display=function(){      //删除的功能
+    var that=this;
+    $(".son").on("click","li>i",function(){
+        that.num=$(this).parent().attr("num")
+        $(this).parent().remove()           //删除dom 元素
+
+        for(var i=0;i<that.caidan.length;i++){
+
+            for(var j=0;j<that.caidan[i].food.length;j++){
+                if(that.num==that.caidan[i].food[j].food_id){
+
+                    that.caidan[i].food.splice(j,1)     //从数组中删除
+                    // $("#data").html(that.caidan)
+                }
+            }
+        }
+    } )
+}
+
+Menu.prototype.move=function(){     
+
+    var that=this;
+    $(".son").on("mousedown","li>b",function(e){
+        var shanchu=$(this);
+       
+        var l=e.clientX
+        var t=e.clientY;
+        var nth=$(this).parent("li");
+        that.num=$(this).parent("li").attr("num")
+
+        document.onmousemove=function(e){
+            var ll=e.clientX-l;
+            var tt=e.clientY-t;
+            
+            nth[0].style.left=ll+"px";
+            nth[0].style.top=tt+"px";
+        }
+        document.onmouseup=function(e){
+
+            for(var k=0;k<$("#menu>li").length;k++){
+                if(e.clientX>$("#menu>li").eq(k)[0].offsetLeft&&e.clientX<$("#menu>li").eq(k)[0].offsetLeft+$("#menu>li").eq(k).width()){
+                    var onoff=true;
+                      for(var i=0;i<that.caidan.length;i++){
+
+                        for(var j=0;j<that.caidan[i].food.length;j++){
+
+                            if(that.num==that.caidan[i].food[j].food_id){
+                            onoff=false;
+                            var ls=that.caidan[i].food.splice(j,1)     //移除
+                            // console.log(that.caidan[k])
+                            that.caidan[k].food.push(ls[0])        // 添加
+                            // console.log(that.caidan[k].food)
+                                // console.log(ls)
+                            
+                            $("#menu>li").eq(k).children(".son").append(
+                                                        `
+                                                        <li num="${ls[0].food_id}";>
+                                                            <span>${ls[0].name}</span> 
+                                                            <u>${ls[0].price}</u> 
+                                                            <i>删除</i>
+                                                            <b>移动</b>
+                                                        </li>
+                                                        `
+                            )
+                            shanchu.parent().remove();
+                            console.log(that.caidan)
+                        }
+                        if(!onoff){
+                            break;
+                        }
+                    }
+                }
+                }
+            }
+        }  
+    })
+}
+
+Menu.prototype.add=function(){
+    var that=this;
+    $(".add").on("click",function(){
+        $(".box").css({display:"block"});
+        var num=$(this).parent().index()
+                
+         
+        var  onoff=1;
+
+        $("input").on("input",function(){
+            onoff = 1 ;
+        })
+
+        $(".xxbox").children("b").on("click",function(){
+
+            for(var i=0;i<that.caidan.length;i++){
+
+                for(j=0;j<that.caidan[i].food.length;j++){
+
+                    if(!$("input").val()){
+                        $("#tipp").html("蔡明不能为空，谢谢。");
+                        onoff = 0 ;
+                    }else{
+
+                        if($("input").eq(2).val()==that.caidan[i].food[j].food_id){
+                            $("#tipp").html("货号重复，请重写编辑，谢谢。")
+                            // alert("货号重复，请重写编辑，谢谢。");
+                            onoff = 0 ;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(onoff){
+                $(".add").eq(num).siblings(".son").append( `
+                                                            <li num="${$("input").eq(2).val()}";>
+                                                                <span>${$("input").eq(0).val()}</span> 
+                                                                <u>${$("input").eq(1).val()}</u> 
+                                                                <i>删除</i>
+                                                                <b>移动</b>
+                                                            </li>
+                                                            `);
+
+            var obj={
+                food_id: $("input").eq(2).val(), 
+                name: ""+$("input").eq(0).val(),
+                price: ""+$("input").eq(1).val()}
+             that.caidan[num].food.push(obj);
+            }
+            $(".xxbox").children("b").on("click",function(){
+                if(onoff){
+                    $(".box").css({display:"none"})
+                    $("input").text("")
+                }
+            })
+        })
+        $(".xxbox").children("i").on("click",function(){
+                $(".box").css({display:"none"})
+        })
+        // $(".box").css({display:"none"})  
+    })
+}
+ 
+
+new Menu({
+    caidan:json
+})
+
+
+</script>
+</html>

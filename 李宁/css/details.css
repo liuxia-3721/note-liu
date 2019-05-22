@@ -1,0 +1,322 @@
+@charset "utf-8";
+html,body{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+#goods{
+    padding-top:20px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    background: #77f;
+    background-clip: content-box;
+    
+}
+#goods .goodsImg{
+    flex: 4;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+#goods .goodsImg img{
+    display:block;
+    width: 80%;
+    height: 90%;
+    margin: auto;
+}
+#goods .introduce{
+    flex: 6;
+    padding: 10px;
+    box-sizing: border-box;
+}
+#goods .introduce h3{
+    padding: 5px;
+}
+#goods .introduce .baoyou{
+    padding: 5px;
+    font-size: 12px;
+    color: #eee;
+    cursor: pointer;
+    text-indent: 5px;
+    margin: 10px 0; 
+}
+#goods .introduce .price{
+    background:#aaa;
+    padding: 5px;
+    /* width: 60% */
+}
+#goods .introduce .price p{
+    padding: 3px 0;
+    font-size: 14px;
+}
+#goods .introduce .price p span{
+    display: inline-block;
+    width: 12%;
+}
+#goods .introduce .price p u{
+    text-decoration: line-through;
+    color: #eee;
+}
+#goods .introduce .price p b{
+    font-size: 20px;
+    color: #f00;
+}
+#goods .introduce .price p i{
+    font-size: 12px;
+}
+#goods .introduce .change{
+    display: flex;
+    padding: 5px;
+    margin: 3px 0;
+}
+#goods .introduce .change dt{
+    padding: 0 3px;
+    margin-right: 10px;
+}
+#goods .introduce .change dd{
+    height: 20px;
+    width: 40px;
+    margin-right: 10px;
+}
+#goods .introduce .change1 dd:nth-child(2){
+    background: #fff;
+}
+#goods .introduce .change1 dd:nth-child(3){
+    background: #000;
+}
+#goods .introduce .change1 dd:nth-child(4){
+    background: #00f;
+}
+#goods .introduce .change1 dd:nth-child(5){
+    background: #f00;
+}
+#goods .introduce .change2 dd{
+    background: #88f
+}
+#goods .introduce .buy{
+    padding: 0 10px;
+    margin: 5px 0;
+}
+#goods .introduce .buy span{
+    border: 1px solid #00f;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+#goods .introduce .buy b{
+    display: inline-block;
+    padding: 0 10px;
+}
+#goods .introduce .money{
+    display: inline-block;
+    margin-left: 15px;
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: #aa0;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#goods .goodsImg .bigbg{
+    position:fixed;
+    width:600px;
+    height:600px;
+    left: 40%;
+    top: 5%;
+    margin: auto;
+    background-size: contain;
+    display: none;
+}
+/*  */
+.show{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    background: #eee;
+}
+.show .say{
+    width: 100%;
+    display: flex;
+    background: #c88;
+}
+.show .say p{
+    flex: 1;
+    text-align: center;
+    padding: 5px 0; 
+    cursor: pointer;
+}
+.show .say p:nth-child(1){
+    background: #0a0;
+    font-weight: 700;
+    margin-bottom: -3px;
+    box-shadow: 1px 1px 1px;
+}
+
+.show ul{
+    width: 100%;
+    box-sizing: border-box;
+}
+/* .show ul li.one{
+    display: none;
+} */
+.show ul li.one p{
+    width: 100%;
+    padding: 10px 30px;
+    display: flex;
+    box-sizing: border-box;
+    font-weight: 700;
+}
+.show ul li.one p .si{
+    flex: 4;
+}
+.show ul li.one p .liu{
+    flex: 6;
+}
+.show ul li.two{
+    display: none;
+}
+.show ul li.two ul{
+    padding:15px 30px;
+}
+.show ul li.two ul li{
+    display: flex;
+    /* justify-content: space-around */
+}
+.show ul li.two ul li div.name{
+    flex: 2;
+    margin:0 60px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height:50px;
+}
+.show ul li.two ul li div.talk{
+    flex: 8;
+}
+.show ul li.two ul li div.talk p{
+    font-size: 14px;
+    padding: 5px 0
+}
+.show ul li.two ul li div.talk p:nth-child(1){
+    color: #22a;
+}
+.show ul li.two ul li div.talk p:nth-child(2){
+    color: #cc8;
+}
+.show ul li.two ul li div.talk p.good em:nth-child(1){
+    display: inline-block;
+    width:21px;
+    height:17px; 
+    background: url(../images/shop/details/talk.png) -21px;
+    margin-right: 5px;
+}
+.show ul li.two ul li div.talk p.good em:nth-child(3){
+    display: inline-block;
+    width:19px;
+    height:15px; 
+    background: url(../images/shop/details/hert.png) -19px;
+    margin-right: 5px;
+}
+.show ul li.two ul li div.talk p.good i{
+    font-style: normal;
+    margin-right: 20px;
+    font-size: 12px;
+}
+.show ul li.two ul li div.talk p.good{
+    display: flex;
+    justify-content: space-between;
+}
+.show ul li.three{
+    background: #0aa;
+    border-bottom: 1px solid #00f;
+    display: none;
+}
+.show ul li.three .wenda{
+    height: 36px;
+    line-height: 36px;
+    background: url(../images/shop/details/gray.png) repeat-x;
+    text-align: center;
+}
+.show ul li.three .wenda span{
+    display: inline-block;
+    height: 100%;
+    width: 120px;
+    text-align: center;
+    background: #f00;
+}
+.show ul li.three>ul{
+    display: flex;
+    width: 732px;
+    flex-wrap: wrap;
+    box-shadow: 1px 1px 1px 1px #55f;
+    margin: 0 auto;
+}
+.show ul li.three>ul li{
+    width: 25%;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    font-weight: bold;
+    width: 183px;
+    height: 60px;
+}
+.show ul li.three>ul li:nth-child(1){
+    background: #fff url(../images/shop/details/bg.png) no-repeat -20px -12px;
+    
+}
+.show ul li.three>ul li:nth-child(2){
+    background:#888 url(../images/shop/details/bg.png) no-repeat -209px -12px;
+}
+
+.show ul li.three>ul li:nth-child(3){
+    background: #fff url(../images/shop/details/bg.png) no-repeat -398px -12px;
+}
+.show ul li.three>ul li:nth-child(4){
+    background:#888 url(../images/shop/details/bg.png) no-repeat -587px -12px;
+}
+.show ul li.three>ul li:nth-child(5){
+    background: #888 url(../images/shop/details/bg.png) no-repeat -20px -72px;
+}
+
+.show ul li.three>ul li:nth-child(6){
+    background:#fff url(../images/shop/details/bg.png) no-repeat -209px -72px;
+
+}
+.show ul li.three>ul li:nth-child(7){
+    background: #888 url(../images/shop/details/bg.png) no-repeat -398px -72px;
+}
+.show ul li.three>ul li:nth-child(8){
+    background:#fff url(../images/shop/details/bg.png) no-repeat -587px -72px;
+}
+.show ul li.three>ul li:hover{
+    background-color: pink
+}
+.show ul li.three dl{
+    background: chocolate;
+    width: 732px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    /* display: none; */
+}
+.show ul li.three dd{
+    display: none;
+}
+.show ul li.three dd:nth-child(1){
+    display: block;
+}
+.show ul li.three dl p{
+    padding: 5px 10px;
+}
+.show ul li.three dl p b{
+    color: pink;
+    font-size: 20px;
+}
+.show ul li.three dl p span{
+    font-size: 14px;
+    text-indent: 30px;
+}

@@ -1,0 +1,172 @@
+-------------------------------------------------------------
+
+项目：
+	1. 定义数据字典(数据库设计)
+		banner：	
+			{ 
+				"_id" : xx, 
+				"title" : "1", 
+				"sub_title" : "1", 
+				"type" : "banner", 
+				"banner" : "xxxx", 
+				"detail" : { 
+					"auth" : "", 
+					"content" : "<p>xxx<p>", 
+					"icon" : "/upload/banner/9d4083b4f1d28a6c0fb4c463526790eb.jpg" 
+				}, 
+			}
+		product: home/follow/column
+			{ 
+				"_id" : xx, 
+				"title" : "1_", 
+				"des" : "2", 
+				"time":234234,
+				"detail" : { 
+					"auth" : "4", 
+					"content" :"<p>3</p>", 
+					"auth_icon" : "xx" 
+				} 
+			}
+		user:	
+			{ 
+				"_id" : xx, 
+				"username" : "alex", 
+				"password" : "alex123", 
+				"follow" : "100", 
+				"fans" : "200", 
+				"nikename" : "九叔_", 
+				"icon" : "/upload/968a3b7218ee744931276a64c9b7ea01.png", 
+				"time" : 1551620448550 
+			}
+		super:
+			{ 
+				"_id" : xx, 
+				"username" : "admin", 
+				"password" : "admin123", 
+				"icon" : "/img/avatar-5.jpg" 
+			}
+
+	2. 素材准备(静态页面模板用户端|管理端)
+	3. 搭建服务器
+	4. 处理 http请求，拿到数据，后端渲染页面，前端制作API
+	5. 项目目录规划
+
+		   bin 启动文件
+		   common 全局公共
+		   		|- douban|mgd
+		   config 全局配置
+		   		|- global (page_num,page_start,rule,q,upload...)
+		   		|- server (local,http,https)
+		   public 资源托管
+		   		|-admin 管理端
+		   		|-template 用户端
+		   		|-upload
+		   			|- banner|product|user
+		   			|- product
+		   				|- home|follow|column
+		   routes 子服务，路由
+		   		admin 管理端
+		   			|- feedback
+		   				|- success|error
+		   			|- product
+		   				|- add|del|check
+		   			|- banner
+		   				|- add|del|check
+		   			|- user
+		   				|- add|del|check
+		   			|- home| product|banner|user
+		   			|- islogin | login | reg | logout
+		   		api 用户端
+		   			|- product | detail | banner | user
+		   		proxy 代理
+		   views 管理端模板 
+		   	 	|- feedback
+		   				|- success|error|app_error
+		   		|- ... 结构同 admin 管理端
+		   	 	|- common
+		   	 		|- header|footer|slider|crumb|toolbar|paging
+
+
+
+
+知识点:
+	路由跳转: 编程式跳转
+		res.redirect(跳转地址?key=value)  //跳转地址 = string  key/value传递值
+	ajax提交后，nodejs需返回跳转地址，由前端跳转
+
+	ejs的js里面 抓取 ejs变量:
+		<script>let js变量 = '<%= ejs变量 %>' </script>
+
+	查询 eval('/'+ varname +'/g') || new RegExp('x'+varname+'x','/g')
+		排序 sort:rule ? {[rule]:-1} : {'detail.time':-1}
+		排序关键字: (标题title|时间:detail.title)
+
+
+
+添加
+	http://localhost:3000/admin/product/add?dataName=xx
+		必传参数: dataName
+		库存储: 添加时间 
+		添加页ejs数据: start=1|q=''|rule=''|page_header|active|user_session
+		提交时ejs数据: dataName|start=1
+
+		富文本框使用:
+			注意jq库冲突： 要使用富文本框提供的jquery-3.2.1.slim.min
+			问题： slim.min没有$.ajax
+			解决： 使用jquery,禁用slim.min
+		图片上传：
+			FormData混合提交 流文件与普通表单混合
+	        form_data = new FormData() | new FormData(表单本身)
+	        form_data.append(key,value) 通过req.body获取
+	        value 可以是file： 
+	        	<input type="file" name="file2" id="file2" />
+	        	formData.append("file2", $('#file2')[0].files[0]);
+	        	通过multer的req.files获取
+
+	        $.ajax({
+	        	contentType: false,//不设置编码类型,在进行文件流与普通字符串混合上传的时候，需要设置为false
+	            processData: false,//不进行数据处理
+	        })
+	        后端需要处理未传图（req.files空)
+	        
+	    js抓取ejs变量
+	    	form_data.append('dataName',"<%=dataName%>");
+	    ajax提交后，nodejs需返回跳转地址，由前端跳转
+	    子节点排序
+	    	.sort({'detail.time':-1,xx:oo})
+
+	删除
+	http://localhost:3000/admin/product/del?dataName=xx&_id=xx&start=2&count=2&q=b&rule=_id
+		必传参数: dataName|_id
+		js所需数据：user_session|page_header|start|q|rule|count|dataName
+		ejs所需数据: start|q|rule|count|dataName
+
+		ID操作注意
+		var ObjectId = require('mongodb').ObjectId;
+		id = ObjectId(req.query.id);     此时的id才是ajax传过来的id,才能与数据库对照
+
+	修改
+	http://localhost:3000/admin/product/check?dataName=xx&_id=xx&start=2&count=2&q=b&rule=_id
+		必传参数: dataName||_id
+		js所需数据：user_session|page_header|start|q|rule|count|dataName|_id
+		ejs所需数据: 接口所需数据 + 查询到的page_data
+
+		提交时:
+			接口所需数据：{title,des,auth,content,dataName,auth_icon_old,_id,start,q,count,rule}
+			ejs所需数据: dataName|start|q|rule|count
+
+		后端需要处理未传图（req.files空)
+	    前端修改时抓取库图地址（渲染用），提交时传递接收到的库图和本地图，服务器优先抓取本地图
+	    修改时删除之前的图片fs.unlink
+	    ajax提交后，nodejs需返回跳转地址，由前端跳转
+
+	检索|排序
+	http://localhost:3000/admin/product?dataName=home&start=2&count=2&q=b&rule=detail.time
+		必传： dataName
+		ejs数据: api_name|page_header|dataName|start|count|q|rule|session|page_data|page_count
+
+		查询 eval('/'+ q +'/g')
+		排序 sort:rule ? {[rule]:-1} : {'detail.time':-1}
+		排序关键字: (标题title|时间:detail.title)
+		
+		分页: 取所有，挑出对应页数，返回给浏览器

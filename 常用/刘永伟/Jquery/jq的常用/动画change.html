@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #0f0;
+            margin-top: 20px;
+            /* display: none; */
+        }
+        .red{
+            background: #f00;
+        }
+        .blue{
+            background:#00f;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="给我变">
+    <input type="button" value="滚走">
+    <input type="button" value="啊哈">
+    <div class="box">
+    </div>
+</body>
+<script src="../jquery.js"></script>
+<script>
+    // $("input[value=给我变]").click(function(){
+    // $("input[value=给我变]").click(function(){
+    //     // console.log($(".red"[0]))
+        
+    //     if(!$(".box").is(".red")){  //通过 is判断class 得到 boolean 值;再进行选择
+    //         $(".box").addClass("red");  //添加一个class 
+    //         $(".box").removeClass("blue");//删除一个class 
+    //     }else{
+    //         if(!$(".box").is(".blue")){
+    //             $(".box").addClass("blue");
+    //             $(".box").removeClass("red");
+    //         }
+    //     }
+    // })
+
+    // 动画 动画 动画 动画 嗯 重要的事情不止说三遍!
+
+    // 内置动画 
+        // show()  hide() toggle()   参数是毫秒数,不传参的话 直接hidden; 
+                        // 隐藏时改变了 透明度,宽,高,padding,margin,等等
+        // $("input[value=给我变]").click(function(){
+        //     $(".box").show(1000)
+        // })
+        // $("input[value=滚走]").click(function(){
+        //     $(".box").hide(1000)
+        // })
+        // $("input[value=啊哈]").click(function(){
+        //     $(".box").toggle(1000)
+        // })
+
+        //上拉              下拉        自行检测
+        // slideDown()  slideUp()  slideToggle()  参数同为毫秒数  过程中改变了许多的属性
+        // $("input[value=给我变]").click(function(){
+        //     $(".box").slideDown(2000)
+        // })
+        // $("input[value=滚走]").click(function(){
+        //     $(".box").slideUp(2000)
+        // })
+        // $("input[value=啊哈]").click(function(){
+        //     $(".box").slideToggle(2000)
+        // })
+
+        // 渐隐渐显     改变透明度 和 display   参数同为毫秒数  
+
+        // $("input[value=给我变]").click(function(){
+        //     $(".box").fadeOut(2000)
+        // })
+        // $("input[value=滚走]").click(function(){
+        //     $(".box").fadeIn(2000)
+        // })
+        // $("input[value=啊哈]").click(function(){
+        //     $(".box").fadeToggle(2000)
+        // })
+
+        //自定义动画    animate( ) 三个参数: 对象  时间 回调函数  ;对象必填
+        $("input[value=给我变]").click(function(){
+            // $(".box").animate({     //回调函数  可以放
+            //     width:300,
+            //     height:200
+            // },1000,function(){
+            //     $(".box").animate({
+            //         width:30,
+            //         height:20
+            //     },3000)
+            // })
+
+            $(".box").animate({     //连缀          之所以能够连缀 是因为函数animate又 return 了自己 this
+                width:300,      //可以进行简单的运算 要是字符串
+                height:200
+            },1000).animate({
+                width:30,
+                height:20
+            },3000)
+            
+        })
+        // $("input[value=滚走]").click(function(){
+        //     $(".box").fadeIn(2000)
+        // })
+        // $("input[value=啊哈]").click(function(){
+        //     $(".box").fadeToggle(2000)
+        // })
+</script>
+</html>

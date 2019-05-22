@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function suijiColor(){  //获取随机的数字并转换为16进制
+        var r=buZero(Math.round(Math.random()*255).toString(16))
+        var g=buZero(Math.round(Math.random()*255).toString(16))
+        var b=buZero(Math.round(Math.random()*255).toString(16))
+           return "#"+r+g+b
+    }
+    function buZero(n){     //进行补零
+        if(n.length<2){
+            return "0"+n
+        }else{
+            return n
+        }
+    }
+    setInterval(function(){
+        document.body.style.background = suijiColor();
+    },500)
+
+</script>
+</html>

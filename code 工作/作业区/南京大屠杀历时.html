@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+// function time(){
+//     var y=d.getFullYear();
+//     var m=d.getMonth();
+//     var date=d.getDate();
+//     var day=d.getDay();
+//     var h=d.getHours();
+//     var mins=d.getMinutes();
+//     var s=d.getSeconds();
+//     function buZero(a){     //补零
+//     if(a<10){
+//             return a="0"+a
+//         }else{
+//             return a
+//         }
+//     }
+//     switch(day){
+//         case 0:day="星期日";break;
+//         case 1:day="星期一";break;
+//         case 2:day="星期二";break;
+//         case 3:day="星期三";break;
+//         case 4:day="星期四";break;
+//         case 5:day="星期五";break;
+//         case 6:day="星期六";break;
+//     }
+//     console.log(y+"年 "+buZero(m+1)+"月 "+buZero(date)+"日 "+day+" "+buZero(h)+": "+buZero(mins)+": "+buZero(s))
+// }
+// time()
+var d=new Date();
+var time2=new Date(1937,12,13,10,01,00);
+var n=d.getTime();
+var m=time2.getTime(); 
+var x=(n-m)/1000    //过去了多少秒
+var t=parseInt((n-m)/1000/60/60/24)//过去了多少天
+var h=parseInt((x-t*24*60*60)/3600)//过去了多少个小时
+var mins=parseInt((x-t*24*60*60-h*60*60)/60)//过去了多少分钟
+var s=parseInt((x-t*24*60*60-h*60*60-mins*60))
+console.log("南京大屠杀距现在已经过去了"+t+"天,"+h+"小时,"+mins+"分钟,"+s+"秒.")
+</script>
+</html>

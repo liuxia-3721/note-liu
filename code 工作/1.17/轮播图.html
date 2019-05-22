@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .cont{
+            margin: 0 auto;
+            position: relative;
+            width: 400px;
+            height: 180px;
+            overflow:hidden  ;
+        }
+        .cont img{
+            position: absolute;
+            vertical-align: middle;
+            width: 400px;
+            height: 180px;
+            left: 400px;
+        }
+        .cont :nth-child(1){
+            left: 0;
+        }
+        input{
+            position: absolute;
+            z-index: 2;
+        }
+        input.right{
+            right: 0;
+        }
+    
+    
+    </style>
+
+
+</head>
+<body>
+    <div class="cont">
+        <img src="../作业区/数字0-9/0.png" alt="">
+        <img src="../作业区/数字0-9/1.png" alt="">
+        <img src="../作业区/数字0-9/2.png" alt="">
+        <img src="../作业区/数字0-9/3.png" alt="">
+        <img src="../作业区/数字0-9/4.png" alt="">
+        <input type="button" value=">>" class="right"/>
+        <input type="button" value="<<" class="left"/>
+    </div>
+</body>
+<script src="../../js工具箱/eleMove.js"></script>
+
+<script>
+    function Banner(){
+
+    // box=document.querySelector(".cont");
+        this.aimg=document.querySelectorAll("img");
+        this.right=document.querySelector(".right");
+        this.left=document.querySelector(".left");
+        
+        this.iNow=0;
+        this.iPrev=this.aimg.length-1;
+        
+        this.addEvent()
+        
+    }
+
+    Banner.prototype.addEvent=function(){
+        var that=this;
+
+        this.right.onclick=function(){
+            that.changeIndex1()
+        }
+
+        this.left.onclick=function(){
+            that.changeIndex2()
+        }
+
+    }
+   
+///////////////////////////////////////////////////////////////////////
+    Banner.prototype.changeIndex1=function(){
+
+        if(this.iNow==this.aimg.length-1){
+            this.iNow=0;
+            this.iPrev=this.aimg.length-1;
+        }else{
+            this.iNow++;
+            this.iPrev=this.iNow-1;
+        }
+        this.eleMove1()
+    }
+
+    Banner.prototype.eleMove1=function(){
+
+        this.aimg[this.iNow].style.left=this.aimg[0].offsetWidth+"px";
+        move(this.aimg[this.iNow],{"left":0});
+
+        this.aimg[this.iPrev].style.left=0;
+        move(this.aimg[this.iPrev],{"left":-this.aimg[0].offsetWidth});
+    }
+///////////////////////////////////////////////////////////////////////
+    
+    Banner.prototype.changeIndex2=function(){
+        if(this.iNow==0){
+            this.iNow=this.aimg.length-1;
+            this.iPrev=0;
+
+        }else{
+            this.iNow--
+            this.iPrev=this.iNow+1;
+        }
+        this.eleMove2()
+
+    }
+    Banner.prototype.eleMove2=function(){
+
+        this.aimg[this.iNow].style.left=-this.aimg[0].offsetWidth+"px";
+        move(this.aimg[this.iNow],{"left":0})
+
+        this.aimg[this.iPrev].style.left=0;
+        move(this.aimg[this.iPrev],{"left":this.aimg[0].offsetWidth});
+    }
+
+    new Banner()
+
+</script>
+</html>

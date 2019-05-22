@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我是一条蛇啊</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: #00f;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="box">
+
+    </div> -->
+</body>
+<script>
+    // console.log(document.getElementById("box"))
+    function Map(){     
+        this.map=document.createElement("div");
+        this.map.style.cssText="width:800px;height:500px;background:#ccc;margin:0 auto;position:relative";
+        document.body.appendChild(this.map);        //创建地图
+    }
+
+    function Food(){
+        this.food=document.createElement("div");
+        this.food.style.cssText="width:20px;height:20px;background:#f00;position:absolute;";
+        omap.map.appendChild(this.food)         //创建食物
+
+        this.foodMove()
+    }
+    Food.prototype.foodMove=function(){         //让食物 进行 随机移动
+        this.x=random(0,omap.map.offsetWidth/this.food.offsetWidth-1);
+        this.y=random(0,omap.map.offsetHeight/this.food.offsetHeight-1);
+
+        this.food.style.left=this.x*this.food.offsetWidth+"px";
+        this.food.style.top=this.y*this.food.offsetHeight+"px";
+    }
+
+    function Snake(){
+        this.arr=[{x:4,y:3,c:"black"},{x:3,y:3,c:"blue"},{x:2,y:3,c:"pink"}];
+        this.w=20;
+        this.h=20;
+        this.direct="right";
+        this.direction()
+        this.creatSnake()
+    }
+    Snake.prototype.creatSnake=function(){
+
+        for(var i=0 ; i<this.arr.length; i++){
+            if(!this.arr[i].ele){   //加判断 用来确定蛇节之前是否存在
+                this.arr[i].ele=document.createElement("div");
+                this.arr[i].ele.style.width=this.w+"px";
+                this.arr[i].ele.style.height=this.h+"px";
+                this.arr[i].ele.style.position="absolute";
+            }
+
+            this.arr[i].ele.style.left=this.arr[i].x*this.w+"px";
+            this.arr[i].ele.style.top=this.arr[i].y*this.h+"px";
+            this.arr[i].ele.style.background=this.arr[i].c;
+            omap.map.appendChild(this.arr[i].ele);
+        }
+
+        setTimeout(function(){
+            this.snakeMove()
+        }.bind(this),200)
+    }
+    
+    Snake.prototype.snakeMove=function(){
+
+        for(var i=this.arr.length-1;i>0;i--){
+            this.arr[i].x=this.arr[i-1].x;
+            this.arr[i].y=this.arr[i-1].y;
+        }
+
+        switch(this.direct){
+            case "left":this.arr[0].x-=1;break;
+            case "top":this.arr[0].y-=1;break;
+            case "right":this.arr[0].x+=1;break;
+            case "bottom":this.arr[0].y+=1;break;
+        }
+        if(this.arr[0].x<0||this.arr[0].x>omap.map.offsetWidth/this.arr[0].ele.offsetWidth-1||this.arr[0].y<0||this.arr[0].y>24){
+
+                alert("游戏结束,刷新页面重新加载");
+                return;
+        }
+        if(this.arr[0].x==ofood.x&&this.arr[0].y==ofood.y){       //判断是否与食物接触
+            this.arr.push({
+                    x:this.arr[this.arr.length-1].x,
+                    y:this.arr[this.arr.length-1].y,
+                    c:"#006"
+            })
+            ofood.foodMove()
+
+            for(var i=0;i<this.arr.length;i++){ //判断食物是否出现在蛇身上，如有，重新随机
+                if(ofood.x==this.arr[i].x&&ofood.y==this.arr[i].y){
+                    ofood.foodMove()
+                }
+            }
+        }
+        for(var i=1;i<this.arr.length;i++){ //判断蛇头有没有和自身接触
+            if(this.arr[0].x==this.arr[i].x&&this.arr[0].y==this.arr[i].y){
+                alert("吃自己了，刷新页面重新加载")
+                return;
+            }
+            console.log(this.arr[0].x,this.arr[i].x)
+        }
+        this.creatSnake()
+    }
+    
+    Snake.prototype.direction=function(value){ //不能直接掉头
+       
+       if(this.direct=="top"||this.direct=="bottom"){
+           switch(value){
+               case 37:this.direct="left";break;
+               case 39:this.direct="right";break;
+           }
+       }
+       if(this.direct=="left"||this.direct=="right"){
+           switch(value){
+               case 38:this.direct="top";break;
+               case 40:this.direct="bottom";break;
+           }
+       }
+   }
+
+    var omap=new Map()
+    var ofood=new Food()
+    var osnake=new Snake()
+    function random(a,b){
+        return Math.round(Math.random()*(a-b)+b)
+    }
+    document.onkeydown=function(eve){
+        var e=eve||window.event;
+        var code=e.keyCode||e.which;
+        osnake.direction(code)
+    }
+</script>
+</html>

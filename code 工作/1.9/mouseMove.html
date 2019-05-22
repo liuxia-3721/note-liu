@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 30px;
+            height: 30px;
+            background: #000;
+            position: absolute;
+            border-radius: 50%;
+            background:url( ../../../图片/111.jpg);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="o1"></div>
+    <div class="o2"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="06"></div>
+</body>
+<script>
+    // var odiv=document.querySelectorAll("div")
+    // // var obody=document.querySelector("body");
+    
+    // document.onmousemove=function(eve){
+    //     var e=eve||window.event;
+    //     var l=e.clientX;
+    //     var t=e.clientY;
+
+    //     odiv[odiv.length-1].style.left=l+"px";
+    //     odiv[odiv.length-1].style.top=t+"px";
+    //     for(var i=0;i<odiv.length-1;i++){
+            
+    //         odiv[i].style.left=odiv[i+1].style.left
+    //         odiv[i].style.top=odiv[i+1].style.top
+    //     }
+    // }
+    
+    // var arr=[23,33,1,2,55,1,7];
+    // for(var i=0;i<arr.length-1;i++){
+    //     for(var j=0;j<arr.length-1-i;j++){
+    //         if(arr[j]>arr[j+1]){
+    //             var ls=arr[j+1];
+    //             arr[j+1]=arr[j];
+    //             arr[j]=ls;
+    //         }
+    //     }
+    // }   
+    // console.log(arr.toString())
+    // var arr=[23,33,1,2,55,1,7]
+    // var obj={a:2,b:22};
+    // for(var i of obj){
+    //     console.log(i)
+    // }
+    // for(var i of arr){
+    //     console.log(i)
+    // }
+    // arr.map(function(v){
+    //     if(v>5){
+    //         console.log(v)
+    //     }
+    // })
+
+//////////////////////////////////////////////////////////////////////
+// // call apply 继承  修改this的指向，缺点：只能继承构造函数，不能继承原型
+// function Father(s1){
+//     this.skill=s1
+//     this.show=function(){
+//         console.log(this.skill)
+//     }
+// }
+// function Son(s2){
+//     Father.call(this,s2)
+// }
+
+// var f=new Father("乔丹");
+// var s=new Son("科比");
+// f.show()
+// s.show()
+
+//原型 继承 ：只能继承原型，不能继承构造函数
+// function Father(){}
+// Father.prototype.show = function(s1){
+//     this.skill=s1;
+//     console.log(this.skill)
+// }
+
+// function Son(){};
+// // Son.prototype=Father.prototype;  浅拷贝
+// for(var i in Father.prototype){     //循环改为深拷贝
+//     Son.prototype[i]=Father.prototype[i]
+// }
+
+// Son.prototype.show=function(){
+//     console.log("这是修改后的")
+// }
+
+// var f=new Father();
+// f.show("乔丹 ");
+
+// var s=new Son();
+// s.show("科比")
+
+// 混合继承 ： 利用call/apply继承构造函数，利用原型继承原型     可用一
+// function Father(s1){
+//     this.skill=s1;
+// }
+// Father.prototype.show=function(){
+//     console.log(this.skill)
+// }
+// function Son(s2){
+//     Father.call(this,s2)
+// };
+// for(var i in Father.prototype){
+//     Son.prototype[i]=Father.prototype[i];
+// }
+
+// var f=new Father("乔丹");
+// f.show();
+// var s=new Son("科比");
+// s.show();
+//原型链继承：  给子对象设置一个原型链为父对象的实列，不方便传参
+// 原理：  给子对象设置一个原型链为父对象的实列。
+// 被new出实例__proto__指向构造函数的原型；
+// 构造函数的prototype指向原型。
+function Father(){
+    this.skill="乔丹吗";
+}
+Father.prototype.show=function(){
+    console.log(this.skill)
+}
+function Son(){}
+Son.prototype=new Father()
+
+var f=new Father();
+f.show()
+var s=new Son();
+s.show()
+
+console.log(f.__proto__)
+console.log(Father.prototype)
+
+// ES6 继承
+// class Father{
+//     constructor(s1){
+//         this.skill=s1
+//     }
+//     show(){
+//         console.log(this.skill)
+//     }
+// }
+// class Son extends Father{
+
+//     constructor(s1){
+//         super(s1)
+//     }
+// }
+// var f=new Father("乔丹");
+// f.show()
+
+// var s=new Son("科比");
+// s.show()
+// function Fn(){}
+// var f = new Fn();
+// console.log(new Fn().__proto__);
+// console.log(Fn.prototype)
+
+// var obj1={a:[1],b:1 }; 
+// var obj2={a:[2],c:2 };
+// var obj = Object.assign(obj1,obj2)
+// console.log(obj)
+
+// function Foo(){    
+//     this.name="test1";    
+//     function bar(){        
+//         this.name="test2"    
+//     };    
+//     bar(); 
+// }   
+// Foo.name = "test3"; 
+// var foo = new Foo();
+// console.log(Foo.name)
+
+// function fn6(fn) {    
+//     return fn(3,5); 
+// } 
+// function fn7(a,b) {     
+//     return a+b; 
+// } 
+// function fn8(a,b) {     
+//     return a*b; 
+// } 
+// var s=fn6(fn7); 
+// var s1=fn6(fn8);
+// console.log(s,s1);//8  15
+
+// function fun1(x){            递归 ~~~~~~~~~~~~~~~~~~
+//     if(x>2){
+//         return (fun1(x-1)+fun1(x-2));
+//     }else{
+//         return 1;}
+// }
+// console.log(fun1(10));
+
+    
+    // function fn3() {
+    //     arguments.callee.play();
+    // }
+    // fn3.play=function () {
+    //     console.log("aaa");
+    // }; 
+    // fn3()   //aaa
+
+    // function Box(){      instanceof用于判断一个变量是否某个对象的实例
+    //     this.name='zhang';
+    // }     
+    // function Desk(){
+    //     this.age=100;
+    // }     
+    // function Table(){
+    //     this.lever=1000;
+    // }     
+    // Desk.prototype=new Box();//通过原型链继承     
+    // var desk=new Desk();     
+    // var table=new Table();
+    // var box=new Box()
+    // desk.name="liu";
+    // console.log(box.name)
+    // console.log(table instanceof Object)
+    // console.log(desk instanceof Box)
+    // console.log(Desk instanceof Box)
+    // console.log(desk  instanceof Desk )
+
+    // var name = 10;      // name 作为变量变量名时 后面无论是什么都会被定义为字符  window.name
+    // var a=10;
+    // var obj = {} 
+    // console.log(name)
+    // console.log(a)
+    // console.log(  obj )
+    
+    // function People(name, age) {
+    //     this.name = "xixi",   
+    //     this.age = 18    
+    //     return "啊实打实"
+    // } 
+    // console.log(new People())       //{}   除了对象 其他return都是原对象本身
+    // var obj = new People();
+    // console.log(obj)
+    // var obj={};
+    // // obj.name=3;
+    // // obj["name"]=3;
+    // obj->name:3;
+    // console.log(obj.name)
+</script>
+</html>

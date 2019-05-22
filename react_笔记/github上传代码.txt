@@ -1,0 +1,16 @@
+wwb 10:17:00<IMG src="file:///C:\Users\heng\AppData\Roaming\feiq\RichOle\1662155449.bmp">wwb 10:17:34git项目管理	
+情况1： 项目已做好，需要使用git上传	
+1. 登录 	github->new repository->复制仓库地址	
+2. git init 	删除.git的隐藏的配置文件夹，初始化项目(生成3区 工作|缓存|本地仓库)	
+3. git remote add origin 仓库地址	关联本地与远端 (形成第4区)	   
+	可选   git pull origin master  拉取项目创建时README.md ，也可手动创建	   		
+  	参考: https://www.cnblogs.com/liugang-vip/p/6337580.html	   可选   本地创建.gitignore 免除如node_modules的文件上传	   		 
+	参考: https://www.cnblogs.com/kevingrace/p/5690241.html	
+4. git add 工作区->缓存区 1->2	
+5. git commit -m '描述'  缓存区->本地仓库 2->3	
+6. git push -u origin master 本地仓库->远端仓库 3->4		
+输入自己的账号和密码	情况2: 创建项目初期使用git管理	
+1. 登录github->new repository->复制仓库地址	
+2. 要创建项目的位置 git clone 地址	 
+ 可选 本地创建.gitignore 免除如node_modules的文件上传	
+3. git add ->  git commit -m '描述'-> git push

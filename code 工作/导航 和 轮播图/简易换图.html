@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+        }
+        img{
+            width: 400px;
+            height: 300px;
+            vertical-align: middle;
+            position: absolute;
+        }
+        input{
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background: #00f;
+            z-index:999;
+            border: 0;
+            top: 150px;
+            outline: none;
+            opacity: 0.6;
+        }
+        input.right{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="../作业区/数字0-9/0.png" alt="">
+        <img src="../作业区/数字0-9/1.png" alt="">
+        <img src="../作业区/数字0-9/2.png" alt="">
+        <img src="../作业区/数字0-9/3.png" alt="">
+        <img src="../作业区/数字0-9/4.png" alt="">
+        
+        <input type="button" value=">>>" class="right">
+        <input type="button" value="<<<" class="left">
+    </div>
+</body>
+<script src="../../js工具箱/eleMove.html"></script>
+<script>
+    var oimg=document.querySelectorAll("img");
+    var oright=document.querySelector(".right");
+    var oleft=document.querySelector(".left");
+    var index=0;
+    var s=1
+    oimg[index].style.zIndex=s
+    oright.onclick=function(){
+        if(index<oimg.length-1){
+            index++;
+            s++;
+            oimg[index].style.zIndex=s;
+        }else{
+            index=0;
+            s++;
+            oimg[index].style.zIndex=s;
+        }
+    }
+    oleft.onclick=function(){
+        if(index>0){
+            index--;
+            s++;
+            oimg[index].style.zIndex=s;
+        }else{
+            index=oimg.length-1
+            s++;
+            oimg[index].style.zIndex=s;
+        }
+    }
+
+</script>
+</html>

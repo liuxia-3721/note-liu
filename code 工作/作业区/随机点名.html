@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            color: #00f;
+            font: 30px/50px "";
+            margin: 10px;
+            text-align: center;
+        }
+        input{
+            display: block;
+            margin: 0 auto;
+            font: 20px "";
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="box">这是一个随机点名的系统，点到会有好运哦！</div>
+    <input type="button" id="btn" value="点击开始" id="btn"/>
+</body>
+<script>
+var arr=["刘大伟","刘小柒","姚谦书","方小九","詹姆斯","库里","阿浩","老婆","老公","好阿婆"];
+var obox=document.getElementById("box");
+var obtn=document.getElementById("btn");
+var a;
+var onOff=1;
+obtn.onclick=function(){
+    clearInterval(a)
+    if(onOff==1){
+        a=setInterval(function suiji(){
+        obox.innerHTML=arr[Math.round(Math.random()*(arr.length-1))]
+        },50)
+        onOff=2;
+        obtn.value="恭喜你"
+    }else{
+        onOff=1;
+        obtn.value="conme on"
+    }
+}
+
+
+</script>
+</html>

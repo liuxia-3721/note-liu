@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        form{
+            width: 300px;
+            height: 300px;
+        }
+        form div.box{
+            width: 300px;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            line-height: 30px;
+            padding: 3px;
+        }
+        div.box input{
+            width: 220px;
+            outline: none;
+        }
+        p.alt{
+            position: absolute;
+            border: 1px solid #000;
+            width: 500px;
+            height: 200px;
+            background: #000;
+            opacity: 0.8;
+            margin: 0;
+            top: 30px;
+            left: 30px;
+            text-align: center;
+            color: #fff;
+            display: none;
+            font-size:30px;
+            line-height:200px;
+        }
+        div.box .yanzheng{
+            width: 250px;
+            height: 30px;
+            background: rgba(222, 222, 222, .8);
+            position: relative;
+            font-size: 14px;
+            text-align: center;
+        }
+        div.box .yanzheng i{
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            background: #00f;
+            left: 0;
+        }
+        div.box .yanzheng u{
+            position: absolute;
+            height: 100%;
+            background: #0f0;
+            left: 0;
+            opacity: 0.3;
+        }
+        div.xieyi{
+            width: 240px;
+            font-size: 8px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        div.xieyi input{
+            width: 10px;
+            height: 10px;
+        }
+        form .btn{
+            width: 220px;
+            height: 50px;
+            background: #00f;
+            text-align: center;
+            margin:0 auto;
+            display: block;
+            border: 0;
+            outline: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <div class="box">
+            <b>用户名</b><input type="text" class="tex"/>
+        </div>
+        <div  class="box">
+            <b>手机号</b><input type="text" class="tex"/>
+        </div>
+        <div  class="box">
+            <b>验证码</b><input type="text" class="tex"/>
+        </div>
+        
+        <div class="box">
+            <b>验证</b>
+
+            <div class="yanzheng">
+                轻按住托快，拖动到最右边
+                <u></u>
+                <i>>></i>
+            </div>
+            
+        </div>
+        <div class="xieyi"><input type="radio"/> 阅读并接受<a href="#">《百度用户协议》</a></div>
+        <input type="button" value="注册" class="btn"/>
+
+        </div>
+    </form>
+    <p class="alt">上一步输入存在问题，请重新输入</p>
+</body>
+<script>
+    var otex=document.querySelectorAll(".tex")
+    var op=document.querySelector(".alt");
+    var oi=document.querySelector(".yanzheng i");
+    var oiBox=document.querySelector(".yanzheng");
+    var ou=document.querySelector(".yanzheng u");
+    console.log(ou)
+    otex[0].value="请设置用户名";
+    otex[1].value="可用于登陆和找回密码";
+    otex[2].value="请输入验证码";
+
+    otex[0].onclick=function(){
+        otex[0].value="";
+    }
+    otex[1].onclick=function(){
+        otex[1].value="";
+    }
+    otex[2].onclick=function(){
+        otex[2].value="";
+    }
+
+    
+    otex[0].onblur=function(){
+        var reg=/^[a-zA-Z_][\w]{5,19}$/;
+        if(reg.test(this.value)==false){
+            op.style.display="block" 
+            setTimeout(function(){
+                op.style.display="none" 
+            },3000)
+        }
+    }
+    otex[1].onblur=function(){
+        var telReg=/^1[\d]{10}$/;
+        if(telReg.test(this.value)==false){
+            op.style.display="block" 
+            setTimeout(function(){
+                op.style.display="none" 
+            },3000)
+        }
+    }
+    otex[2].onblur=function(){
+        var maReg=/[\da-zA-Z]{4}$/;
+        if(maReg.test(this.value)==false){
+            op.style.display="block" 
+            setTimeout(function(){
+                op.style.display="none" 
+            },3000)
+        }
+    }
+
+    oi.onmousedown=function(eve){
+        var e=eve||window.event;
+        var disX=e.offsetX;
+        console.log(disX)
+
+        document.onmousemove=function(eve){
+
+            var e=eve||window.event;
+            var s=e.clientX-disX-oiBox.offsetLeft;
+            console.log(s)
+            // e.stopPropagation();    
+            // console.log(e.offsetX)
+            // if(s>oi.offsetWidth){
+                oi.style.left=s+"px";
+
+                ou.style.width=s+"px";
+                console.log(oi.offsetLeft)
+                if(oi.offsetLeft==oiBox.offsetWidth-oi.offsetWidth-2){
+                    ou.innerHTML="验证成功";
+                    ou.style.opacity=1;
+                    oi.innerHTML="~~"
+                }
+            // }
+        }
+        document.onmouseup=function(){
+            document.onmousemove=null;
+        }
+    }
+</script>
+</html>

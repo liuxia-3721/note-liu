@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>55二维数组</title>
+</head>
+<body>
+    
+</body>
+<script>
+var arr=[];
+function erwei(a,b){
+    for(i=0;i<5;i++){
+        var arr2=[];
+        for(j=0;j<5;j++){
+            arr2[j]=(Math.round(Math.random()*(a-b)+b));
+        }
+            console.log(arr2)
+            arr[i]=arr2; 
+    }    
+    console.log(arr)
+}
+
+erwei(3,6)
+</script>
+</html>

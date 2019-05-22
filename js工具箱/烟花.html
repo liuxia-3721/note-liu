@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.box{
+            width: 900px;
+            height: 600px;
+            background: #000;
+            margin: 0 auto;
+            position: relative;
+        }
+        .box .fire{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            bottom:0;
+        }
+        .fireS{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+<script src="../js工具箱/eleMove.js"></script>
+<script>
+
+    function Fire(){
+        this.obox=document.querySelector(".box");
+        this.fireMove();
+    }
+
+
+    Fire.prototype.fireMove=function(eve){
+            this.e=eve||window.event;
+            var that=this;
+
+            this.x=this.e.clientX-this.obox.offsetLeft;
+            this.y=this.e.clientY-this.obox.offsetTop;
+
+            this.fire=document.createElement("div");
+            this.fire.className="fire";
+            this.fire.style.background=randomColor();
+            this.fire.style.left=this.x+"px";
+            this.obox.appendChild(this.fire);
+
+            move(this.fire,{"top":this.y},function(){
+                this.fire.remove()
+                that.fireS()
+            }.bind(this));
+
+    }
+
+    // Fire.prototype.fireS=function(){            //小烟花随机运动
+    //     var num=random(10,20);
+    //     var that=this;
+
+    //     for(var i=0;i<num;i++){
+
+    //         let fireS=document.createElement("div");
+    //         fireS.className="fireS";
+    //         this.obox.appendChild(fireS);
+
+    //         fireS.style.left=this.x+"px";
+    //         fireS.style.top=this.y+"px";
+    //         fireS.style.background=randomColor();
+
+    //         move(fireS,{
+    //             left:random(0,that.obox.offsetWidth - 20),
+    //             top:random(0,that.obox.offsetHeight - 20),
+    //         },function(){
+    //             fireS.remove();
+    //         })
+    //     }
+    // }
+
+    Fire.prototype.fireS=function(){        //小烟花圆周运动
+        var num=random(10,20);
+        var r=random(100,200);
+     
+        for(var i=0;i<num;i++){
+            let fireS=document.createElement("div");
+            fireS.className="fireS";
+            this.obox.appendChild(fireS);
+
+            fireS.style.left=this.x+"px";
+            fireS.style.top=this.y+"px";
+            fireS.style.background=randomColor();
+
+            move(fireS,{
+                left:Math.round(Math.cos(Math.PI/180 * (360/num)*i) * r)+this.x,
+                top:Math.round(Math.sin(Math.PI/180 * (360/num)*i) * r)+this.y
+            },function(){
+                fireS.remove();
+            })
+        }
+
+    }
+
+    function randomColor(){
+        return  `rgb(${random(0,255)},${random(0,255)},${random(0,255)})`
+    }
+
+    function random(a,b){
+        return  Math.round(Math.random()*(a-b)+b)
+    }
+
+    var obox=document.querySelector(".box");   //存在多个烟花，每个烟花都是独立的对象，
+    obox.onclick=function(){                  //每次点击时都要重建，所以点击事件不能放在构造函数中
+        new Fire()
+    }
+</script>
+</html>

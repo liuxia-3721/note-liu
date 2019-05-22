@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    img{
+        width: 400px;
+        height: 260px;
+        display: block;
+        margin: 0 auto;
+    }
+    input{
+        display: block;
+        background: #000;
+        margin: 5px auto;
+        outline: none;
+        border: 0;
+        border-radius: 50%;
+        color: #00f;
+    }
+    body input.te{
+        background: #0f0;
+    }
+    </style>
+</head>
+<body>
+    <img src="../../../../图片/0.jpg" alt="">
+    <input type="button" class="btn te" value="0"/>
+    <input type="button" class="btn" value="1"/>
+    <input type="button" class="btn" value="2"/>
+</body>
+<script>
+var butn=document.getElementsByTagName("input");
+var oimg=document.querySelector("img");
+var obtn=document.getElementsByClassName("btn");
+
+for(var i=0;i<obtn.length;i++){
+        var index=obtn[i];
+        index.onclick=function(){
+
+        for(var j=0;j<obtn.length;j++){
+           obtn[j].style.background="#000"
+        }
+        oimg.src="../../../../图片/"+this.value+".jpg";
+        this.style.background="#0f0";
+        console.log(this)
+    }
+}
+                           
+
+</script>
+</html>

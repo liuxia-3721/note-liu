@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            height: 80px;
+        }
+        div img{
+            width: 50px;
+        }
+        div span{
+            font:700 50px/100px "";
+        }
+    
+    </style>
+</head>
+<body>
+    <div>
+        <img src="数字0-9/1.png" alt="">
+        <img src="数字0-9/1.png" alt="">
+        <span>:</span>
+        <img src="数字0-9/1.png" alt="">
+        <img src="数字0-9/1.png" alt="">
+        <span>:</span>
+        <img src="数字0-9/1.png" alt="">
+        <img src="数字0-9/1.png" alt="">
+    </div>
+</body>
+<script>
+    var aimg=document.getElementsByTagName("img");
+    time()
+    setInterval((time),1000)
+    function time(){
+        var d=new Date();
+        var h=buZero(d.getHours())
+        var m=buZero(d.getMinutes())
+        var s=buZero(d.getSeconds())
+        // console.log(aimg)
+        aimg[0].src="数字0-9/"+h[0]+".png";
+        aimg[1].src="数字0-9/"+h[1]+".png";
+        aimg[2].src="数字0-9/"+m[0]+".png";
+        aimg[3].src="数字0-9/"+m[1]+".png";
+        aimg[4].src="数字0-9/"+s[0]+".png";
+        aimg[5].src="数字0-9/"+s[1]+".png";
+    }
+    function buZero(n){
+        if(n<10){
+            return "0"+n;
+        }else{
+            return ""+n
+        }
+    }
+
+</script>
+</html>

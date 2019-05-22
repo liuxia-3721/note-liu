@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // class Person{
+    //     constructor(s1){
+    //         this.name=s1
+    //     }
+    //     say(){
+    //         console.log(this.name+3)
+    //     }
+    // }
+    // class Pone extends Person{
+    //     constructor(s){
+    //         super(s)
+    //     }
+    // }
+    // var f=new Person(2);
+    // f.say();
+    // var f2=new Pone(3)
+    // f2.say()
+        function Mdiv(){
+            this.div=document.createElement("dialog");
+            this.div.innerHTML="我是模态框"
+
+            document.body.appendChild(this.div);
+        }
+        Mdiv.prototype.time=function(){
+            var that=this;
+            clearTimeout(that.timer)
+            this.div.style.display="block";
+
+            if(this.div.style.display=="block"){
+                this.timer=setTimeout(function(){
+                    that.div.style.display="none"
+                },2000)
+            }
+        }
+        Mdiv.a=new Mdiv()
+
+        document.onclick=function(){
+            Mdiv.a.time()
+        }
+        // function Mdiv(){
+        //     if(!Mdiv.obj){
+
+        //         Mdiv.obj={};
+        //         Mdiv.obj.div=document.createElement("dialog");
+        //         Mdiv.obj.div.innerHTML="我是模态框"
+        //         document.body.appendChild(Mdiv.obj.div);
+        //     }
+        //         Mdiv.obj.div.style.display="block";
+
+        //     clearTimeout(Mdiv.obj.timer)
+        //     Mdiv.obj.timer=setTimeout(function(){
+        //         Mdiv.obj.div.style.display="none";
+        //     },3000)
+        //     return Mdiv.obj
+        // }
+
+        // document.onclick=function(){
+        //    new Mdiv();
+        // }
+        
+</script>
+</html>

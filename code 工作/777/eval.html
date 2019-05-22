@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    // eval方法只能在非严格模式中进行使用，在use strict中是不允许使用这个方法的
+
+    // eval函数接收一个参数s，如果s不是字符串，则直接返回s。否则执行s语句。
+    // 如果s语句执行结果是一个值，则返回此值，否则返回undefined
+    var str="[1.2]";
+    console.log(eval(str))
+
+    var str="({name:'admin',age:16})"// 多个键值对时必须添加括号，返回值为对象
+    console.log(eval(str))  //  {name: "admin", age: 16}  
+
+    var str="{name:'admin'}"  // 对象中仅一个键值对时，可以不用括号 直接返回value 
+    console.log(eval(str))  //  admin
+
+var json=[2,3,4,1]
+                  
+    console.log(JSON.stringify(json))
+</script> 
+</html>

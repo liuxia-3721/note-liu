@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style-type: none;
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+        ul li{
+            background:#099;
+            color: #000;
+            padding: 3px 5px;
+            width: 80px;
+            text-align: center;
+        }
+    
+    </style>
+</head>
+<body>
+    <ul>
+        <li>复制</li>
+        <li>粘贴</li>
+        <li>剪切</li>
+        <li>刷新</li>
+        <li>更多</li>
+    </ul>
+</body>
+<script>
+// var oul=document.getElementsByTagName("ul")[0];
+// document.oncontextmenu=function(eve){
+//     oul.style.display="block";
+//     var e=eve||window.event;
+//     console.log(e)
+//     e.preventDefault?e.preventDefault():e.teturnValue=false;
+        
+//     oul.style.left=e.pageX+"px";
+//     oul.style.top=e.pageY+"px";
+// }
+// document.onclick=function(){
+//     oul.style.display="none";
+// }
+// var a="10";
+// console.log( Boolean("123"))
+var arr3=[1,2,2,3,22,4,5,44,4,3333,333,22];
+
+function norepeat2(arr){
+    var arr2=[];
+    for (var i=0;i<arr.length;i++){
+        arr2.push(arr[i])
+    
+        var s=1;
+        for(var j=0; j<arr2.length;j++){
+            if(arr[i]==arr2[j]){
+                s++;
+                if(s==3){
+                    arr2.splice(j,1)
+                }
+            }
+        }
+    }
+    return arr2
+}
+console.log(norepeat2(arr3))
+</script>
+</html>

@@ -1,0 +1,117 @@
+﻿	3）SCSS 是 Sass 3 引入新的语法
+			安装: node-sass
+			sass：
+				使用换行和缩进
+
+				$bg-color: #939
+				.box
+					background: #bg-color
+
+			scss：
+				使用分号和花括号
+				$bg-color: #399;
+				.box{
+				  background: $bg-color;
+				}
+			定义主题： $theme-color: #300
+
+			scss for create-react-app脚手架
+				引入:	xx.sass/xx.scss  使用: <xx className="box"
+				引入:	style form xx.module.sass/xx.module.scss  使用: <xx className={style.box}
+
+				引入sass全局变量?
+					1. 局部sass： @import './全局.scss'
+					2. 安装插件 : sass-resources-loader
+					配置:use: [
+					              {loader:'style-loader'},
+					              {loader:'css-loader'},
+					              {loader:'sass-loader'},
+					              {
+					                loader: 'sass-resources-loader',
+					                options:{
+					                  resources:'./src/xx/全局主题.scss'
+					                }
+					              }
+					            ]
+				            
+动画
+	css tansition
+	ant.desinge动画
+
+		https://motion.ant.design/api/queue-anim
+
+		QueueAnim:进退场动画  组件
+
+		QueueAnim组件内部的 一级元素&& 进退场,做动画
+		一级元素要有key，根据编号依次做动画,无key不动画
+		路由离场动画无效
+		包裹路由组件无效(一级元素&& 进退场)
+
+------------------------------------------------------------------------------------
+生命周期流程:
+	实例化 ->  更新期  -> 销毁时
+	实例化:
+		es5:
+			1.取得默认属性(getDefaultProps) 外部传入的props
+			2.初始状态(getInitailState)  state状态
+		    3.即将挂载 	componentWillMount
+		    4.描画VDOM  	render
+		    5.挂载完毕	componentDidMount
+		es6:
+		 	1.取得默认属性(getDefaultProps) 外部传入的props
+			2.初始状态(getInitailState)  state状态
+				1 && 2 都在构造器里面完成
+				constructor(props){
+					super(props) == getDefaultProps
+					this.state={} == getInitailState
+				}
+		    3.即将挂载 componentWillMount
+		    4.描画VDOM  render
+		    5.挂载完毕 componentDidMount
+	更新期:
+		0.props改变 componentWillReceiveProps(nextProps)
+			初始化render时不执行 这里调用更新状态是安全的，并不会触发额外的render调用
+			nextProps 更新后  this.props更新前
+		1.是否更新 shouldComponentUpdate  指视图
+		2.即将更新 componentWillUpdate
+		3.描画dom  render
+		4.描画结束 componentDidUpdate
+	销毁时:
+		即将卸载 componentWillUnmount
+		可以做一些组件相关的清理工作，例如取消计时器、网络请求等
+
+
+实例化->存在(更新)->销毁时
+	getDefaultProps->getInitialState->componentWillMount->render->componentDidMount
+	->shouldComponentUpdate->componentWillUpdate->render->componentDidUpdate->
+	->componentWillUnmount
+
+------------------------------------------------------------------------------------
+
+数据交互：
+	官方脚手架 静态数据读取时，参考根指向public  '/data' == public/data
+	fetch	原生就有
+	fetch(url+数据,{配置}).then(成功函数(res)).catch()
+	res.ok -> true/false 成功/失败
+	res.status - > 状态码
+	res.body 数据 数据流(stream)
+	res.text() 转换 文本(string)
+		过程异步：	return res.text()
+		同步： res.text().then((data)=>{})	data:转换后的数据
+	res.json() 转  对象
+	配置:
+		method:'POST'
+		headers:{"Content-type":"application/x-www-form-urlencoded"},
+		body:'a=1&b=2'|URLSearchPrams|{}???
+
+jsonp:  fetch不带jsonp请求  需要依赖第三库
+	npm install fetch-jsonp -D
+	import xxx from 'xxx'
+	用法:
+		fetchJsonp(url+数据,{配置}).then(success(res)).catch(error)
+		特点: 是个promise 返回promise 数据是个流
+		解析：res.json()  -> 流转换数据 是异步
+		配置:
+			timeout: 延时  5000
+			jsonpCallback: 回调函数key callback
+			jsonpCallbackFunction: null

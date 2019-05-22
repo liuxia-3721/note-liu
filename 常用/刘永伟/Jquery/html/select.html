@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul ul{
+            display: none;
+        }
+    
+    </style>
+</head>
+<body>
+    <ul class="box">
+        <li>
+            <span>一级菜单</span>
+            <ul>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li>
+            <span>一级菜单</span>
+            <ul>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li>
+            <span>一级菜单</span>
+            <ul>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li>
+            <span>一级菜单</span>
+            <ul>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+<script src="../jquery.js"></script>
+<script>
+    $(".box>li").mouseover(function(){
+        //      子元素          显示             父元素          兄弟        子元素                  隐藏
+       $(this).children("ul").stop().show(600).parent().stop().siblings().children("ul").stop().hide(500)
+    })
+</script>
+</html>

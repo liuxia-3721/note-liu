@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            border: 1px solid #00f;
+        }
+            
+        .list{
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .list li{
+            width: 60px;
+            margin: 0 5px;
+            background: #44f;
+        }
+        span{
+            display: inline-block;
+            width: 100px;
+            background: #0f0;
+            margin: 0 5px;
+            display: none;
+        }
+        .box span:nth-child(2){
+            display: block;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="list">
+            <li>1啊</li>
+            <li>2啊</li>
+            <li>3啊</li>
+            <li>4啊</li>
+        </ul>
+        <span>11111111</span>
+        <span>22222222</span>
+        <span>33333333</span>
+        <span>44444444</span>
+    </div>
+</body>
+<script src="jquery.js"></script>
+<script>
+    $(".list").children("li").on("click",function(){
+        $(this).index();
+        $("span").css({display:"none"}).eq($(this).index()).css({display:"block"})
+    })
+
+
+</script>
+</html>

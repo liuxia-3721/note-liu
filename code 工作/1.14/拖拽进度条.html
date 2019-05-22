@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            display: flex;
+            border: 1px solid #00f;
+            margin: 0 auto;
+            width: 500px;
+            height: 50px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .box i{
+            width: 50px;
+        }
+        .bar{
+            width: 300px;
+            height: 30px;
+            border: 1px solid #000;
+            border-radius: 10px;
+        }
+        .bar p{
+            margin: 0;
+            padding: 0;
+            width: 0;
+            background: #f00;
+            height: 100%;
+            border-radius: 9px;
+            position: relative;
+        }
+        .bar p b{
+            display: block;
+            height: 130%;
+            width: 20px;
+            position: absolute;
+            top: 0;
+            background: #000;
+            position: absolute;
+            top: -15%;
+        }
+    
+    
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>0%</span>
+        <i>0%</i>
+        <div class="bar">
+            niohao 
+            <p>
+                <b></b>
+            </p>
+        </div>
+        <span>100%</span>
+    </div>
+</body>
+<script>
+    var obar=document.querySelector(".bar");
+    var op=document.querySelector("p");
+    var ob=document.querySelector("p b");
+    var oi=document.querySelector("i"); 
+    
+    ob.onmousedown=function(eve){
+        var e=eve||window.event;
+        var s=e.offsetX;
+        document.onmousemove=function(eve){
+            var e=eve||window.event;
+            var l=e.clientX-op.offsetLeft-s;
+            if(l<0){
+                l=0
+            }
+            if(l>obar.offsetWidth-ob.offsetWidth){
+                l=obar.offsetWidth-ob.offsetWidth
+            }
+            ob.style.left=l+"px"
+            op.style.width = l + ob.offsetWidth/2 + "px";
+            e.preventDefault();
+            oi.innerHTML= Math.round(l/(obar.offsetWidth-ob.offsetWidth)*100)+"%"
+        }
+        document.onmouseup=function(){
+            document.onmousemove=null;
+        }
+    }
+</script>
+</html>

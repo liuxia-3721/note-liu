@@ -1,0 +1,93 @@
+﻿------------------------------------------------------------------
+mongoDb
+	干嘛的：数据库,nosql(非关系型)
+	场景：解决大规模数据集合多重数据种类
+	下载：https://www.mongodb.com/download-center
+
+	启动库：启动数据库服务(服务端)
+		C:\Program Files\MongoDB\Server\3.4\bin
+			mongod.exe 启动服务端
+			port=27017	默认端口
+			mongodb://127.0.0.1:27017	协议+IP+端口
+	指定数据存储目录： 需要指定一次
+		mongod --dbpath c:\data\db
+		我的	C:\data
+	环境变量：为了在任意盘符下去启动库  mongod服务端|mongo客户端
+
+	开启客户端: mongo 回车
+		UI: 收费(下载+缴费)
+		命令行(shell):	cmd->mongo回车	git bash - > mongo回车     webstrom->dos/linux
+
+	和mysql对比
+
+	名词
+		mysql			mongoDb
+
+		database(库)		database(库)
+		table(表)		collection(集合)
+		row(一条数据)	document(文档)
+		column(字段)		field(区域)
+		...
+
+	存储方式:
+		mysql 二维表
+		MongoDB json
+	库操作:
+		查: show dbs
+			db 查看当前库
+		建:	use 库名	没有建，有就切换
+		删: db.dropDatabase()  删除当前库
+	集合(表)操作:
+		建：db.createCollection('表名',{配置})
+			配置：{size:文件大小,capped:true,max:条数|文档数} capped定量
+			db.表(集合).isCapped() 返回 true/false 是否是定量
+		查：show collections / db.getCollectionNames()
+		删：db.表|集合.drop()
+	文档(row)操作:
+		增：
+			db.集合.save({}) / db.集合.insert({})  添加一条
+			db.saveOne({})
+			db.insertOne({})
+
+			db.集合.save([{},{}]) / db.集合.insert([{},{}]) 多条
+			insert  不会替换相同ID	save会
+
+		删:
+			db.集合.deleteOne({}) db.集合.remove({},true)  一条
+			db.集合.remove({要删数据条件描述}) 多条
+			db.集合.remove({}) 清空表
+		改:
+			db.集合.udpate({查询条件},{替换条件},插入,全替换)
+			替换后的：
+				{$set:{数据},$inc:{age:1}}
+		查:
+			所有：db.集合.find(条件)
+			条数: db.集合.find().count()
+			去重：db.集合.distinct(key)
+
+			条件
+				{age:22}		age == 22
+				{age:{$gt:22}}	age > 22
+				{age:{$lt:22}}    age < 22
+				{age:{$gte:22}}	age>=22
+				{age:{$lte:22}}	age<=22
+				{age:{$lte:122,$gte:22}}	age<=122 && age>=22
+				{$or:[{age:22},{age:122}]}	22 or 122
+				{key:value,key2,value2}  value && value2
+				{name:/正则/}
+
+			db.集合.find({条件},{指定要显示列区域})
+				指定要显示列区域: 区域名username:1 显示着个区域，其他不显示
+				指定要显示列区域: 区域名username:0 不显示着个区域，其他显示
+				_id 是默认显示
+			限定：
+				db.集合.find().limit(number)  限定
+				db.集合.find().skip(number)	跳过
+				db.集合.findOne() / db.集合.find().limit(1)  查询第一条
+		排
+			升：db.集合.find().sort({key:1,key2:-1})
+			降：db.集合.find().sort({key:-1})
+
+
+		db.集合.find({条件},{指定显示区域}).skip(10).limit(10).sort({key:1})
+		db.insertOne({数据描述})

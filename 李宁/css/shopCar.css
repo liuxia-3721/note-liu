@@ -1,0 +1,160 @@
+@charset "utf-8";
+html,body{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+#car{
+    width: 100%;
+    background: #eee;
+    margin-top: 20px;
+}
+#car>img{
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+#car table{
+    padding-top: 20px;
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+#car table .gou{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #444;
+    cursor: pointer;
+}
+#car table thead{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+#car table tr{
+    display: flex;
+    flex: 1;
+    justify-content:space-between;
+    align-items: center;
+    margin: 10px 0 ;
+}
+#car table thead th:nth-child(1){
+    display:flex;
+    justify-content:space-around;
+}
+#car table tr .price p:nth-child(2){
+    text-decoration: line-through;
+    color: #eaa;
+}
+#car table tr .price p:nth-child(1){
+    color: #00f;
+}
+#car table th{
+    flex: 1;
+    justify-content:space-between;
+    align-items: center;
+}
+#car table tbody{
+    display: block;
+    width: 100%;
+}
+#car table tbody td{
+    display: block;
+    /* width: 100%; */
+    height: 100%;
+    flex: 1;
+    justify-content:space-between;
+    align-items: center;
+    text-align: center
+}
+
+#car table tbody td.name{
+    font-size: 14px;
+}
+#car table tbody td.zhekoujia{
+    color: red;
+}
+#car table tbody td span.reduce{
+    display: inline-block;
+    padding: 0 10px;
+    border: 1px solid #0f0;
+}
+#car table tbody td span.add{
+    display: inline-block;
+    padding: 0 10px;
+    border: 1px solid #0f0;
+}
+#car table tbody td b{
+    margin: 0 10px;
+}
+#car table img{
+    vertical-align: middle;
+    width: 64px;
+    height: 64px;
+}
+#car tfoot{
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+}
+#car tfoot tr{
+    background: #77f;
+    height: 50px;
+}
+#car tfoot th{
+    flex: 1;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+#car tfoot th:nth-child(1){
+    justify-content:space-around;
+}
+#car tfoot th:last-child{
+    background: #f66;
+    cursor: pointer;
+}
+#gouwuche{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 450px;
+    text-align: center;
+}
+table tbody #gouwuche td{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#gouwuche td img{
+    display: block;
+    width: 600px;
+    height: 450px;
+    margin: auto;
+}
+#pay{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 400px;
+    height: 320px;
+    display: none;
+}
+#pay img{
+    width: 400px;
+    height: 320px;
+    display: block;
+}
+#pay span{
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
+}

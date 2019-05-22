@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 30px;
+            height: 30px;
+            background: #00f;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+var odiv=document.querySelector("div");
+var r=30;
+var start=0;
+var speed=10;
+var target=360;
+var timer;
+document.onclick=function(){
+    clearInterval(timer);
+        timer=setInterval(function(){
+            start+=speed;
+            odiv.style.left = Math.sin(Math.PI/180 * start) * r + 200 + "px";
+                odiv.style.top = Math.cos(Math.PI/180 * start) * r + 200 + "px";
+
+
+
+        }
+    ,30)
+}
+
+</script>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script src="./jquery.js"></script>
+<script>
+    function randm(a,b){                // 随机数函数
+        return Math.round(Math.random()*(a-b)+b)
+    }
+
+    $("body").append("<div id='map'></div>") ;      
+    $("#map").css({                 //地图
+            width:"600",
+            height:"400",
+            background:"#ee5",
+            position:"relative",
+            margin:"0 auto"
+        }) ;
+
+    $("#map").append("<div id='food'></div>") ;
+    $("#food").css({            //食物
+            width:"40",
+            height:"40",
+            background:"#66f",
+            position:"absolute"
+        }) ;
+
+    let xMax = $("#map").width()/$("#food").width() ;
+    let yMax = $("#map").height()/$("#food").height() ;
+    $("#food").css({            //食物随机
+        left:randm(0,xMax-1) * $("#food").width(),
+        top:randm(0,yMax-1) * $("#food").height()
+    })
+
+</script>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <span class="box222">111</span>
+        <span>222</span>
+        <span style="display:none">333</span>
+        <p id="read">444</p>
+        <p class="box111">555</p>
+        <p>666</p>
+        <ul>
+            <li class="list"><a href="">111</a></li>
+            <li><a href="">222</a></li>
+            <li class="list"><a href="">333</a></li>
+            <li><a href="">444</a></li>
+            <li><a href="">555</a></li>
+        </ul>
+        <input type="text" value="10" name="user">
+        <input type="text" value="11" name="pass">
+        <input type="text" value="12" name="user">
+    </div>
+</body>
+<script src="../jquery.js"></script>
+<script>
+    // $(元素).css(color）   获取color属性
+    // $(元素).css([color,border,..]）   获取元素对象的多个属性
+
+    //  $(元素).css({           //原生获取元素后使用jquery的方法设置css样式
+                                //原声转jquery    $(原生元素对象)
+    // })   
+
+
+    // var box=$(".box");          //选中所有的class元素
+    // box.css({
+    //     border:"1px solid #00f",
+    //     background:"#0f0", 
+    //     height:"+=50"
+    // })
+    // var box=$("#box");             //选中第一个id
+    // box.css({
+    //     border:"solid 3px #00f"
+    // })
+
+    // $ (" .box span ")                  所有的后代span 
+    // $ (" .box ") . find( "span" )      所有的后代span 
+
+    // $ (" .box > span ")                所有的子代span
+    // $ (" .box ") . children( "span" )  所有的子代spanm
+
+    // $ (" .box + span ")                下一个span
+    // $ (" .box ") . next ( "span" )     下一个span
+
+    
+    //$('#id').siblings() 当前元素所有的兄弟节点
+    // $ ("  .box ~ span  ")                下所有的span
+    // $ (" .box ").nextAll ("span")        下所有的span
+    // $ (" .box ").nextAll ()              下所有的兄弟
+    // $ (".box111").nextUntil(".box222").css({background:"red"})            下所有的兄弟
+
+    //prev          上一个的功能同上
+
+
+
+    // $ ("input[name]");                   属性选择器
+    // $ ("input[name=pass]")               属性值选择器
+    // var box=$("li:first");               第一个li        
+    // var box=$("li:last");                最后一个li
+    // var box=$("li:odd");                 奇数 li
+    // var box=$("li:even");                偶数 li
+    // var box=$("li:not(.list)");          li 中 class 名不为list的
+
+    // var box=$("li").eq( n ) )            第 n 个 li     
+    // var box=$("li:eq( n )");             第 n 个 li 
+    
+    // var box=$("li:empty");               所有 内容为空的 li 
+    // var box=$("ul:has(.list)");          li 有class为 list 的ul
+    // var box=$("span:contains(1)");       元素内容里  带有 1 的所有标签       
+    // $("input") . val ( )                 获取input控件的 value
+    // var box=$("span:contains(1)");             
+    // box.css({
+    //     border:"solid 3px #00f"
+    // })
+    // $("span:hidden").css({background:"red"})     给不可见的span添加
+    //  $("span:visible").css({background:"red"})     给可见的span添加
+    // $("span:first").is(".box")    判断当前span 是否有box的class   可判断class和id
+    // $("span:first").hasClass("box")    判断当前span 是否有box的class 仅判断class
+
+    // append() 在元素最后面直接添加内容  可识别标签
+    //  prepend() 在元素在最前前面添加内容
+    // remove()  删除自己
+
+    //对象.attr("class")        获取对象的class属性     一个参数是 查  两个是增或设置  参数为对象也是增
+    //对象.removeAttr("class")          删除对象属性
+    //对象.addClass("")          添加一个类名
+    //对象.removeClass("")       删除一个类名
+
+    //对象.partent()          找到父元素
+    //对象.partents()           找到父元素及其祖先
+    //对象.partents( length-1 )     找到根元素
+    //对象.partentsUntil ( html )     找到html以上的祖先元素
+
+    //对象.html()  不传参获取   传参是设置      识别标签
+    //对象.text()  不传参获取   传参是设置
+
+    // jquery 遍历对象的方法
+    //  $.each(对象，function(key,value){
+
+    // })
+
+    // 宽高类
+    // $(元素对象).width()   元素width
+    // $(元素对象).innerWidth()   元素width + padding
+    // $(元素对象).outerWidth()   元素width + padding + border
+
+    //定位类
+    // $(元素对象).offset().left()      //定位的left+margin
+    // $(元素对象).position().left()      //定位的left
+
+    //索引类
+    // $(元素对象).index()  直接得到此对象所对应的索引
+
+    // 事件之后克隆 克隆的没有事件
+    // 事件之前克隆 克隆的有事件
+    // 元素.clone() 克隆相同的元素
+    // 元素.clone(true) 克隆相同的元素会有事件效果
+
+    // queue
+    // jq中事件绑定 只有2级,没有1级   2级(事件监听)     1级直接绑定
+</script>
+</html> 

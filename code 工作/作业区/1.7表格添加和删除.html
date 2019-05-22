@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    姓名：<input type="text" id=tex1 value=""/>
+    班级：<input type="text" id="tex2" value=""/>
+    <input type="button" value="添加" id="btn"/>
+    <br/>
+    <br/>
+    <br/>
+    <table border="1";cellspacing="0"  width="500" cellspacing="0">
+        <tr>
+            <th>姓名 </th>
+            <th>班级 </th>
+            <th>是否迟到 </th>
+        </tr>
+    </table>
+</body>
+<script>
+var otex1=document.getElementById("tex1");
+var otex2=document.getElementById("tex2");
+var otable=document.getElementsByTagName("table")[0];
+var obtn=document.getElementById("btn")
+
+       
+obtn.onclick=function(){
+        var otd1=document.createElement("td");
+        otd1.innerHTML=otex1.value;
+        var otd2=document.createElement("td");
+        otd2.innerHTML=otex2.value;
+        var otd3=document.createElement("td");
+        otd3.innerHTML="删除"
+        var otr=document.createElement("tr");
+        otr.appendChild(otd1);
+        otr.appendChild(otd2);
+        otr.appendChild(otd3);
+    if(otex1.value&&otex2.value){
+        otable.appendChild(otr)
+    }else{
+        console.log("两项内容都不能为空哦")
+    }
+    otd3.onclick=function(){
+        otd3.parentNode.remove()
+    }
+    
+}
+
+
+
+</script>
+</html>

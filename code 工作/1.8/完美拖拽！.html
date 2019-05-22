@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background: #227;
+        }
+        div{
+            width: 300px;
+            height: 220px;
+            position: absolute;
+            top:100px;
+            left: 100px;
+        }
+        div p{
+            background: #ff9;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content:space-between;
+            overflow: hidden;
+        }
+      
+        div img{
+            display: block;
+            width: 300px;
+            height: 200px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div>
+        <p class="move"><span>回放</span></p>
+        <img src="../../../图片/0.jpg" alt=""/>
+    </div>
+</body>
+<script>
+    var obox=document.getElementsByClassName("move")[0];
+    var obox=document.querySelector("div");
+
+window.onload=function(){
+    var positionArr=[]
+    
+    obox.onmousedown=function(eve){
+        positionArr=[];
+        var e=eve||window.event;
+        e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+        var x=e.offsetX;
+        var y=e.offsetY ;
+        document.onmousemove=function(eve){
+            var e=eve||window.event;
+            e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+            obox.style.left=e.clientX-x+"px"
+            obox.style.top=e.clientY-y+"px";
+            positionArr.push({left:obox.offsetLeft,top:obox.offsetTop});
+        }
+    }
+
+    obox.onmouseup=function(eve){
+        var e=eve||window.event;
+        e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+        document.onmousemove=null;
+    }
+
+    obox.children[0].firstChild.onmousedown=function(eve){
+        var e=eve||window.event;
+        e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+    }
+
+    obox.children[0].firstChild.onclick=function(){
+        var index = positionArr.length-1;
+        var timer = setInterval(function(){
+        
+       
+            obox.style.left = positionArr[index--].left+"px";
+            console.log(obox)
+            obox.style.top = positionArr[index--].top+"px";
+        
+            if(index < 0) {
+            clearInterval(timer);
+        }
+        },30);
+    }
+}
+
+    function fn(b){ 
+        console.log(this);
+        this.b = b; 
+        console.log(this.a); 
+    } 
+
+    var obj = {a:4,fn:fn};
+     fn();  
+     obj.fn(); 
+     fn.call(obj);   
+     fn.apply(null)
+
+     
+</script>
+</html>

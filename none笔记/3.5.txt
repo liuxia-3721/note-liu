@@ -1,0 +1,157 @@
+﻿模块化:
+	commonJS
+		是主要为了JS在后端的表现制定
+		commonJS 是个规范 nodejs / webpack 是一个实现
+		ECMA 是个规范  js / as 实现了
+	服务器端JS:	相同的代码需要多次执行|CPU和内存资源是瓶颈|加载时从磁盘中加载
+	浏览器段js:	代码需要从一个服务器端分发到多个客户端执行|带宽是瓶颈|通过网络加载
+	模块： http/fs/querystring/url		require('模块名')  系统模块
+	模块化：require module exports		seajs.js / require.js   CMD/AMD/UMD   es5
+
+	require 引入模块、输入
+		require('模块名')
+			不指定路径：	先找系统模块-> 再从项目环境找node_modules|bower_components (依赖模块)->not found
+			指定xx/模块名	 指定路径 -> not found
+				/xx  磁盘环境根，  当前的盘符c:>
+				     网络项目环境根,   当前项目目录环境   npm/xx/xx/a.js(/)  npm\
+				     向上，			当前IIS配置 FTP上传的根目录
+				/ 加载资源时候用
+		require(./utils).xx  按需引用
+	exports 导出，批量输出
+		exports.自定义属性=值(any) 输出带接口		require(模块文件名)=modA  modA是个模块实例{自定义属性}
+	module 模块 函数|类|对象 只能输出一次
+	
+		module.exports = {  
+			自定义属性：值
+		}
+
+		module.exports=对象/fn/class   			require('..')=modA  modA 是一个fn或者是类class本身
+
+	commonJS 是 nodejs 默认模块方式,不支持es6的模块化管理，但支持所有es6+语法
+
+NPM：		自动化管理
+	干嘛的：帮助你安装模块（包），自动安装依赖，管理包（增，删，更新，项目所有包)
+	类似：	bower		yarn(https://yarn.bootcss.com/)
+
+	全局：任何目录c/d/e，
+		工具类，脚手架
+	项目环境:	只能在当前目录使用
+
+	项目依赖dependencies： 只能在当前项目下使用，上线了，也需要这个依赖
+	开发依赖devDependencies：只能在当前项目下使用	，上线了，依赖不需要了
+
+	安装、卸载到全局
+	npm i 包名 -g			g==golbal			yarn add 包名  bower install 包名
+	npm uninstall 包名 -g			g==golbal
+
+	安装、卸载到本地
+	npm install 包名 | npm install 包名@x.x.x 指定版本
+	npm uninstall 包名  yarn remove 包名
+
+	查看已安装:		npm list  列出所有已装包
+					npm outdated 版本对比(安装过得包)
+					npm info 包名 查看当前包概要信息 
+					npm view 包名 versions 查看包历史版本列表
+	管理模块(项目):
+		package.json的name的名字需要和项目目录名一致，不要和依赖的包重名
+		npm init 				初始化npm管理文件(package.json)
+			{
+			  "name": "npm",	项目名称
+			  "version": "0.0.1",	版本
+			  "description": "test and play",	描述
+			  "main": "index.js", 入口文件
+			  "dependencies": {  项目依赖  上线也要用
+			    "jquery": "^3.2.1"
+			  },
+			  "devDependencies": { 开发依赖 上线就不用
+			    "animate.css": "^3.5.2"
+			  },
+			  "scripts": {	命令行
+			    "test": "命令行",
+			  },
+			  "repository": {	仓库信息
+			    "type": "git",
+			    "url": "git+https://github.com/alexwa9.github.io/2017-8-28.git"
+			  },
+			  "keywords": [  //关键词
+			    "test",'xx','oo'
+			  ],
+			  "author": "wan9",
+			  "license": "ISC",	认证
+			  "bugs": {
+			    "url": "https://github.com/alexwa9.github.io/2017-8-28/issues"
+			  },
+			  "homepage": "https://github.com/alexwa9.github.io/2017-8-28#readme"
+			}
+	安装到项目依赖
+		npm install 包名 --save  /  -S
+	安装到开发依赖
+		npm install 包名 --save-dev /  -D
+
+	安装package.json里面指定的所有包:
+		npm install
+	版本约束：
+		^x.x.x   约束主版本，后续找最新
+		~x.x.x   保持前两位不变，后续找最新
+		*		 装最新
+		x.x.x 	 定死了一个版本
+		
+	选择源
+		npm install nrm -g     安装选择源的工具包
+
+		nrm ls 查看所有源
+		nrm test 测试所有源
+		nrm use 源名
+	模块下载	(卡顿)   超过5分钟
+		ctrl + c -> npm uninstall 包名 -> npm cache clean清除缓存 -> npm install 包名
+
+	发布模块：
+		注册账号 	npmjs.com
+		登录:
+			npm login
+				输入 user/password/email
+		创建包目录->npm init -y -> 创建入口index.js -> 编写，输出-> npm publish发布
+
+		发布：npm publish
+		删除：npm unpublish
+
+		发布操作长时间没有做，邮箱需要确认，收取激活邮件
+------------------------------------------------------------------------------
+express  库
+	http://www.expressjs.com.cn/
+	干嘛的：nodejs库，不用基础做起，工作简单化
+	类似：koa
+express特点：
+	二次封装，非侵入式，增强形
+	send(any)  write(string|buffer)
+express搭建服务
+	express=require('express')
+	server=express()
+	server.listen(端口,地址,回调)
+静态页面托管
+	server.use() 响应 /
+	express.static('./wwww')
+	server.use(express.static('./wwww'));
+响应:
+	server|app == 服务
+	server.use(url|地址,(req,res,next)=>{})
+		use 响应get和post请求 默认响应的是 / 接受中间件|路由|函数 需要next 延续后续请求
+	server.get(url,(req,res,next)=>{})
+	server.post(url,(req,res,next)=>{})
+		  req / res 经过二次封装
+		  	res.send(any)	== res.write + end
+		  	req.query 获取get的数据
+		  	req.body 获取post的数据  依赖中间件
+		  		中间件使用:body-parser  1. npm install xx  2. require   3. app.use(中间件())
+		  	req.method 获取前端提交方式
+		  next: 是个函数 调用下一个相同地址的响应,除了/
+	app.use('/jsonp接口',(req,res,next)=>req.jsonp(json)
+		app.set('jsonp callback name', 'cb'); 设定回调函数键 默认callback
+		req.query jsonp请求携带的数据
+		res.jsonp(响应数据) 响应数据=需要返回数据给-》jsonp请求的回调函数
+	app.all('/admin/*|/api/*',fn) all匹配全路径 处理所有HTTP 需要next 延续后续
+	处理一个404页面
+		res.status(404).send({error:1,msg:"Sorry can't find that!"})
+  		res.sendFile(path.resolve('public/error.html'))//渲染纯 HTML 文件
+
+提高: http://www.expressjs.com.cn/advanced/developing-template-engines.html

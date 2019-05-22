@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        width: 180px;
+        height: 30px;
+        border: 1px solid #00f;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        text-align: center;
+    }
+    input{
+        position: relative;
+        z-index: 100;
+    }
+
+</style>
+<body>
+    <input type="button" value="-" id="btn1"/>
+    <input type="button" value="+" id="btn2"/>
+    <input type="color" id="color">
+    <input type="button" value="2b（橡皮）专用" id="btn3"/>
+    <div class="box"></div>
+</body>
+<script>
+    var obox=document.querySelector(".box")
+    var obtn1=document.getElementById("btn1")
+    var obtn2=document.getElementById("btn2")
+    var obtn3=document.getElementById("btn3")
+    var ocolor=document.getElementById("color")
+    var h=w=5;
+    var c=ocolor.value;
+    // obtn1.onclick=function(){
+    //     if(h<=5){
+    //         w=h=5;
+    //     }else{
+    //         w-=5;
+    //         h-=5;
+    //     }
+    // }
+    // obtn2.onclick=function(){
+    //         w+=5;
+    //         h+=5;
+    // }
+    // ocolor.onchange=function(){
+    //    c=this.value
+    // }
+
+    
+    // obtn3.onclick=function(){
+    //     c="#fff"
+    // }
+            
+    document.onmousemove=function(eve){
+        var e=eve||window.event;
+        var x=e.clientX;
+        var y=e.clientY;
+        obox.innerHTML=e.clientX + "px,"+ e.clientY + "px"
+        var span=document.createElement("span");
+        span.style.cssText="display:block;border-radius:50%;position:absolute;"
+        span.style.top=y+"px";
+        span.style.left=x+"px";
+        span.style.height=h+"px";
+        span.style.width=w+"px";
+        span.style.background=c;
+        document.body.appendChild(span);
+    }
+</script>
+</html>

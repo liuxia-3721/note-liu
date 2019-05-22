@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #00f;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="走你">
+    <input type="button" value="给我站住">
+    <div class="box">
+    </div>
+</body>
+<script src="../jquery.js"></script>
+<script>
+    $("input[value=走你]").click(function(){
+        $(".box").animate({left:200},1000).animate({top:200},1000).animate({left:50},1000).animate({top:50},1000)
+    })
+    $("input[value=给我站住]").click(function(){
+        $(".box").stop(false,false)  //默认false,false
+    })
+
+    // stop()，两个参数：
+    // 1.表示队列：布尔true,清除队列，false不清除队列
+    // 2.表示当前：布尔true,立即到终点，false停在当前位置
+
+    // 当前动画：
+    // 动画队列：
+    // 在开启动画之前，一定要先stop，防止产生动画队列;
+    // delay(1000)  延时放在stop前面
+</script>
+</html>

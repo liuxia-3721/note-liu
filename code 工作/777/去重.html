@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+var myarr=[12,33,445,6,7711,1,1,2,88,12,33,33]
+
+function norepeat(arr){
+    var obj={};
+   for(var i=0;i<myarr.length;i++){
+        if(obj[myarr[i]]){  //若有重复的数字，则+1
+            obj[myarr[i]]++
+        }else{              //数字添加到空对象中，并表明值为1
+            obj[myarr[i]]=1;
+        }
+    }
+    var newArr=[];
+        for(var i in obj){
+            newArr.push(Number([i]))
+        }
+    return (newArr)
+}
+
+
+// var c="111";
+console.log(norepeat())
+</script>
+</html>

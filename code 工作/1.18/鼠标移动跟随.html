@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 20px;
+            height: 20px;
+            background: #00f;
+            border-radius: 50%;
+            position: absolute;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+<script src="../a.js"></script>
+<script>
+    say()
+    var odiv=document.querySelectorAll("div");
+
+    document.onmousemove=function(eve){
+        var  e=eve||windom.event;
+        var  l=e.clientX;
+        var  t=e.clientY;
+
+        odiv[0].style.left=l+"px";
+        odiv[0].style.top=t+"px";
+        for(var i=odiv.length-1;i>0;i--){
+            odiv[i].style.left=odiv[i-1].style.left;
+            odiv[i].style.top=odiv[i-1].style.top;
+        }
+    }
+
+
+
+
+</script>
+</html>

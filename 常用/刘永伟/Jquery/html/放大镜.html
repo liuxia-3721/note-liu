@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .s_box{
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            top: 20px;
+            left: 50px;
+        }
+        .s_box img{
+            width: 300px;
+            height: 200px;
+        }
+        .s_box span{
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background: rgb(200, 200, 200,0.6);
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .b_box{
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            left: 380px;
+            top: 20px;
+            overflow: hidden;
+            display: none;
+        }
+        .b_box img{
+            width: 1500px;
+            height: 1000px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="s_box">
+        <img src="img/five.jpg" alt="" />
+        <span></span>
+    </div>
+    
+    <div class="b_box">
+        <img src="img/five.jpg" alt="" />
+    </div>
+</body>
+<script src="../jquery.js"></script>
+<script>
+    function Big(){
+        this.sbox=$(".s_box");
+        this.bbox=$(".b_box");
+        this.span=$("span:empty");
+        this.img=$(".b_box img");
+
+        this.over();
+        this.out();
+    }
+    Big.prototype.over=function(){
+        var that=this;
+        this.sbox[0].onmouseover=function(){
+            that.bbox.css({
+                display:"block"
+            });
+            that.span.css({
+                display:"block"
+            })
+        }
+
+        this.move();
+    }
+    Big.prototype.move=function(){
+        var that=this;
+        this.sbox.get(0).onmousemove=function(eve){
+            var e=eve||window.event;
+
+            var l=e.clientX-that.sbox[0].offsetLeft-that.span[0].offsetWidth/2;
+            var t=e.clientY-that.sbox[0].offsetTop-that.span[0].offsetHeight/2;
+            if(l<=0) l=0;
+            if(t<=0) t=0; 
+          
+            if(l>that.sbox[0].offsetWidth-that.span[0].offsetWidth){
+                l=that.sbox[0].offsetWidth-that.span[0].offsetWidth
+            }
+            if(t>that.sbox[0].offsetHeight-that.span[0].offsetHeight){
+                t=that.sbox[0].offsetHeight-that.span[0].offsetHeight
+            }
+            var ll=(that.img[0].offsetWidth-that.bbox[0].offsetWidth)*(-l/(that.bbox[0].offsetWidth-that.span[0].offsetWidth));
+            var tt=(that.img[0].offsetHeight-that.bbox[0].offsetHeight)*(-t/(that.bbox[0].offsetHeight-that.span[0].offsetHeight));
+            
+            that.span.css({
+                left:l+"px",
+                top:t+"px"
+            })
+            that.img.css({
+                left:ll+"px",
+                top:tt+"px"
+            })
+        }
+    }
+    Big.prototype.out=function(){
+        var that=this;
+        this.sbox[0].onmouseout=function(){
+            that.bbox.css({
+                display:"none"
+            });
+            that.span.css({
+                display:"none"
+            })
+        }
+    }
+    new Big();
+</script>
+</html>

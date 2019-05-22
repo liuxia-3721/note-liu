@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body></body>
+<script>
+    function Scroe(){
+        this.scroe=document.createElement("div");
+        this.scroe.style.cssText="width:300px;height:50px;background:#00f;position:absolute;top:520px;left:0;right:0;margin:auto;"
+        document.body.appendChild(this.scroe);
+        this.b=document.createElement("b");
+        this.i=0;
+        this.b.innerHTML="得分"+this.i;
+        this.b.style.cssText="display:block;color:red;font-size:30px;line-height:50px"
+        this.scroe.appendChild(this.b);
+    }
+    var si=new Scroe;
+
+    function Map(){         //创建地图
+        this.map=document.createElement("div");
+        this.body=document.querySelector("body");
+        this.map.style.cssText="width:800px;height:500px;background:#ccc;margin:0 auto;position:relative";
+        this.body.appendChild(this.map);
+    }
+
+    function Food(){    //创建随机的食物
+        
+        this.food=document.createElement("div");
+        this.food.style.cssText="width:20px;height:20px;background:#f99;position:absolute;";
+        maP.map.appendChild(this.food);
+
+        this.w=20;
+        this.h=20;
+
+        this.create()
+    }
+    Food.prototype.create=function(){
+        this.x=random(0,39)
+        this.y=random(0,24)
+        if(!this.food){
+            this.food=document.createElement("div");
+            this.food.style.cssText="width:20px;height:20px;background:#f99;position:absolute;";
+            maP.map.appendChild(this.food)
+        }else{
+            this.food.style.left=this.x*this.w+"px";
+            this.food.style.top=this.y*this.h+"px";
+            maP.map.appendChild(this.food);
+        }
+    }
+
+    function Snake(){        //蛇的创建
+        this.w=20;
+        this.h=20;
+
+        this.arr=[{x:3,y:3,c:"red"},{x:2,y:3,c:"blue"},{x:1,y:3,c:"green"}];
+       
+        this.direct ="right";
+        this.create();
+    }
+    Snake.prototype.create=function(){
+
+        for(var i=0;i<this.arr.length;i++){
+
+            if(!this.arr[i].ele){
+
+                this.arr[i].ele=div=document.createElement("div");
+                this.arr[i].ele.style.width=this.w+"px";
+                this.arr[i].ele.style.height=this.h+"px";
+                this.arr[i].ele.style.position="absolute"; 
+            }
+                this.arr[i].ele.style.left=this.arr[i].x*this.w+"px";
+                this.arr[i].ele.style.top=this.arr[i].y*this.h+"px";
+                this.arr[i].ele.style.background=this.arr[i].c;
+                maP.map.appendChild(this.arr[i].ele);
+            
+        }
+        this.arr[0].ele.innerHTML="0";
+
+        // if(this.arr.length<=18){
+            setTimeout(function(){
+                this.move()
+            }.bind(this),200)
+        // }
+        // if(this.arr.length>18){
+        //     setTimeout(function(){
+        //     this.move()
+        //     }.bind(this),100)
+        // }
+        // if(this.arr.length>38){
+        //     setTimeout(function(){
+        //     this.move();
+        //     }.bind(this),90);
+        // }
+    }
+
+    Snake.prototype.move=function(){    //蛇的移动
+        for(var i=this.arr.length-1;i>0;i--){
+            this.arr[i].x=this.arr[i-1].x;
+            this.arr[i].y=this.arr[i-1].y;
+        }
+        // this.arr[0].x+=1;
+        switch(this.direct){
+            case "left":this.arr[0].x-=1;break;
+            case "top":this.arr[0].y-=1;break;
+            case "right":this.arr[0].x+=1;break;
+            case "bottom":this.arr[0].y+=1;break;
+        }
+
+        if(this.arr[0].x<0||this.arr[0].x>39||this.arr[0].y<0||this.arr[0].y>24){ //判断是否撞墙
+            alert("游戏结束,刷新页面重新加载");
+            return;
+        }
+        
+        if(this.arr[0].x==fooD.x&&this.arr[0].y==fooD.y){       //判断是否与食物接触
+            this.arr.push({
+                x:this.arr[this.arr.length-1].x,
+                y:this.arr[this.arr.length-1].y,
+                c:"#006"
+            })
+            si.b.innerHTML="得分"+(++si.i);
+            fooD.create()
+           
+            for(var i=0;i<this.arr.length;i++){ //判断食物是否出现在蛇身上，如有，重新随机
+                if(fooD.x==this.arr[i].x&&fooD.y==this.arr[i].y){
+                    console.log(1)
+                    fooD.create()
+                }
+            }
+        }
+        for(var i=1;i<this.arr.length;i++){
+            if(this.arr[0].x==this.arr[i].x&&this.arr[0].y==this.arr[i].y){
+                alert("吃自己了，刷新页面重新加载")
+                return;
+            }
+        }
+        // console.log(this.arr)
+        this.create();
+    }
+
+    Snake.prototype.direction=function(value){
+        switch(value){
+            case 37:this.direct="left";break;
+            case 38:this.direct="top";break;
+            case 39:this.direct="right";break;
+            case 40:this.direct="bottom";break;
+        }
+    }
+    var maP=new Map();
+    var fooD=new Food(); 
+    var snakE=new Snake()
+
+    function random(a,b){
+        return  Math.round(Math.random()*(a-b)+b)
+    }
+
+    document.onkeydown=function(eve){
+        var e=eve||window.event;
+        var code=e.keyCode||e.which;
+        snakE.direction(code)
+    }
+</script>
+</html>

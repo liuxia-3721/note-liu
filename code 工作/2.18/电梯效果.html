@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100%;
+            height: 300px;
+            font-size: 50px;
+        }
+        .btn{
+            position: fixed;
+            bottom: 20px;
+            right: 29px;
+            background: orchid;
+            cursor: pointer;
+        }
+    
+    </style>
+</head>
+<body>
+    <div style="background:red">五楼</div>
+    <div style="background:black">四楼</div>
+    <div style="background:yellow">三楼</div>
+    <div style="background:green">二楼</div>
+    <div style="background:blue">一楼</div>
+    <ul class="btn">
+        <li>5楼</li>
+        <li>4楼</li>
+        <li>3楼</li>
+        <li>2楼</li>
+        <li>1楼</li>
+    </ul>
+</body>
+<script src="jquery.js"></script>
+<script>
+    $(function(){
+
+        $(".btn").children("li").click(function(){
+            // console.log(this)
+            // console.log($(this).index())
+            // $(document).scrollTop($("div").eq($(this).index()).offset().top);
+            $("html").stop().animate({scrollTop:$("div").eq($(this).index()).offset().top},2000)
+        })
+    })
+
+
+
+</script>
+</html>

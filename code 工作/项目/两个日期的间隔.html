@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+ 
+    function intevl(date1,date2){
+        var d1=new Date(date1);
+        if(date2){
+            var d2=new Date(date2);
+        }else{
+            var d2=new Date();
+            date2="当前的时间"
+        }
+        var n=Math.abs(d1-d2);
+        var d=parseInt(n/1000/60/60/24);//多少天
+        var h=parseInt(n/1000/60/60-d*24);//多少个小时
+        var m=parseInt(n/1000/60-d*24*60-h*60)//多少分钟
+        console.log(date1+"与"+date2+"差了"+d+"天，"+h+"小时，"+m+"分钟。")
+        console.log(d1)
+    }
+    intevl("2011,11,2 11:11:11","2003,2,3 7:22:22")
+</script>
+</html>

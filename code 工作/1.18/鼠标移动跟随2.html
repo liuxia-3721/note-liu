@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #88f;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    function move(){
+        document.onmousemove=function(eve){
+            var e=eve||window.evnet;
+            var l=e.clientX;
+            var t=e.clientY;
+            var leaf=document.createElement("div");
+
+            document.body.appendChild(leaf);
+            leaf.style.left=l+"px";
+            leaf.style.top=t+"px";
+
+            setTimeout(function(){
+                leaf.remove()
+            },1000)
+        }
+        
+    }
+    var timer;
+    timer=setInterval(move,10)
+
+</script>
+</html>

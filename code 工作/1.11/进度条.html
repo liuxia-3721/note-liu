@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 301px;
+            height: 300px;
+            border: 3px solid #00f;
+            margin:10px auto;
+        }
+        p{
+            width: 0px;
+            height: 30px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p></p>
+    </div>
+</body>
+<script>
+    var odiv=document.querySelector("div");
+    var op=document.querySelector("p");
+    var s=parseInt(getComputedStyle(odiv,false).width)
+    console.log(typeof op)
+  
+    var x=parseInt(getComputedStyle(op,false).width)
+    function jindu(){
+        x+=22;
+        if(x<s){
+            op.style.width=x+"px";
+        }else{
+            x=s;
+            op.style.width=x+"px";
+            clearInterval(timer)
+        }
+        op.innerHTML=parseInt(x/s*100)+"%"
+    }
+    
+    var timer=setInterval(jindu,30)
+</script>
+</html>
